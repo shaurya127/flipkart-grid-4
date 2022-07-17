@@ -1,0 +1,42 @@
+.share_btn {
+    font-size:36px;
+    cursor:pointer;
+  } 
+  .share_links { list-style: none;
+    }
+    
+  .share_links li {
+      display: inline-block;
+      background-color: black;
+      margin: 15px;
+      border-radius: 50%;
+      background: #000;
+    }
+  .share_icon {
+        color: white;
+        display: table-cell;
+        vertical-align: middle; 
+        text-align: center;
+        text-decoration: none;
+        font-size: 32px;
+        height: 80px;
+        width: 80px;
+  
+  }
+  .share_links .bg_fb:hover {
+     color: #fff;
+     background:#3b5998;
+  }
+  .share_links .bg_insta:hover {
+     color: #fff;
+     background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  }
+  .share_links .bg_whatsapp:hover {
+     color: #fff;
+     background:#25D366;
+  }
+  
+  
+  .share_links li:hover  .share_icon {
+     color: #fff;
+  }

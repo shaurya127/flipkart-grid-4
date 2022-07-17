@@ -1,0 +1,110 @@
+body {
+  /* background-color: black; */
+  /* border: 1px solid var(--unnamed-color-0c0c0c); */
+  background: #1a1a1a 0% 0% no-repeat padding-box;
+}
+
+.buttonwork {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.req {
+  /* position: absolute; */
+  width: 81px;
+  height: 12px;
+  left: 951px;
+  top: 1533px;
+font-size: 10px;
+  /* Ghost text mobile */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 12px;
+
+  color: #ffffff;
+}
+textarea {
+  width: 300px;
+  height: 150px;
+}
+
+.formfill {
+  margin: 18px;
+  margin-left: 50px;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-32) /
+    var(--unnamed-line-spacing-44) var(--unnamed-font-family-bahnschrift);
+  letter-spacing: var(--unnamed-character-spacing-6-4);
+
+  text-align: left;
+  font: normal normal normal 24px Bahnschrift;
+  letter-spacing: 6.4px;
+}
+
+.formtxtfill {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background: #363636;
+  border-radius: 6px;
+  width: 80%;
+  height: 40px;
+  border:none;
+  /* color: white; */
+}
+.formtxtfill2{
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background: #363636;
+  border-radius: 6px;
+  height: 90px;
+  border:none;
+
+}
+.docs {
+  /* border: 2px solid; */
+  /* border-color: #5999ad #5aa6b2; */
+}
+
+::placeholder {
+  /* color: #a0abb8; */
+  padding: 18px;
+  /* margin: 10px; */
+}
+.getstarted {
+  padding: 10px;
+  margin-left: 26px;
+  /* Header 2 */
+ 
+  font-style: normal;
+  font-weight: bold;
+  font-size: 27px;
+  line-height: 140%;
+  margin-top: 20px;
+  /* padding-top: -10px; */
+  /* display: inline; */
+  margin-left: 44px;
+  /* identical to box height, or 38px */
+
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+
+  color: #0070ff;
+}
+
+.digitalbutton {
+  width: 221px;
+  height: 47px;
+  border: 2px solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  background-color: black;
+  color: #f1f1f1;
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 160%;
+  margin-right: 75rem;
+}

@@ -1,0 +1,18 @@
+.filter-card {
+  padding-top: 1rem;
+  display: flex;
+}
+.filter-card-content {
+  color: white;
+  padding-left: 1rem;
+  font-size: 0.8rem;
+}
+
+.filter-card-content-name {
+  padding: 0.1rem;
+  padding-bottom: 0;
+}
+.filter-card-content-floorPrice {
+  padding: 0.1rem;
+  padding-top: 0;
+}

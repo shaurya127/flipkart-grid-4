@@ -1,0 +1,63 @@
+#commH1 {
+  padding: 100px 0 80px 0;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 140%;
+}
+#privacyImg {
+  width: 1100px;
+  padding-bottom: 30px;
+}
+.containerpri {
+  text-align: start;
+}
+#commP {
+  font-size: 16px;
+  line-height: 28px;
+  color: #e5e5e5;
+}
+#commH2 {
+  padding: 60px 0 20px 0;
+  font-weight: bold;
+  color: #fafafa;
+  font-size: 30px;
+}
+#commH5 {
+  padding-top: 20px;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}
+#commUL li {
+  line-height: 25px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#column1 {
+  width: 25rem;
+}
+#column2 {
+  width: 18rem;
+}
+#column3 {
+  width: 20rem;
+}
+th {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+#table-item {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}

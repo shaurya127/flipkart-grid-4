@@ -1,0 +1,122 @@
+.preview-details-container {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.key-value-pair {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0.2rem 1rem 0;
+    margin-top: 5rem;
+    /* margin: 1rem 2rem 2rem; */
+}
+
+.key {
+    /* height: 24px; */
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-24)/var(--unnamed-line-spacing-34) var(--unnamed-font-family-bahnschrift);
+    letter-spacing: var(--unnamed-character-spacing-4-8);
+    color: var(--unnamed-color-e6e6e6);
+    text-align: left;
+    font: normal normal bold 24px/34px Bahnschrift;
+    letter-spacing: 4.8px;
+    color: #E6E6E6;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+.value {
+    /* height: 36px; */
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-36)/var(--unnamed-line-spacing-50) var(--unnamed-font-family-bahnschrift);
+    letter-spacing: var(--unnamed-character-spacing-7-2);
+    color: var(--unnamed-color-ffffff);
+    text-align: left;
+    font: normal normal bold 36px/50px Bahnschrift;
+    letter-spacing: 7.2px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    opacity: 1;
+    margin: 1rem 0;
+}
+
+.key-other {
+
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-24)/var(--unnamed-line-spacing-34) var(--unnamed-font-family-bahnschrift);
+    letter-spacing: var(--unnamed-character-spacing-4-8);
+    color: var(--unnamed-color-707070);
+    text-align: left;
+    font: normal normal normal 24px/34px Bahnschrift;
+    letter-spacing: 4.8px;
+    color: #707070;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+.value-other {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-32)/var(--unnamed-line-spacing-44) var(--unnamed-font-family-bahnschrift);
+    letter-spacing: var(--unnamed-character-spacing-6-4);
+    color: var(--unnamed-color-ffffff);
+    text-align: left;
+    font: normal normal bold 32px/44px Bahnschrift;
+    letter-spacing: 6.4px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    opacity: 1;
+    margin: 2rem 0;
+}
+
+.preview-action-btn {
+    width: 306px;
+    height: 80px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    opacity: 1;
+
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-32)/var(--unnamed-line-spacing-44) var(--unnamed-font-family-bahnschrift);
+    letter-spacing: var(--unnamed-character-spacing-6-4);
+    color: var(--unnamed-color-707070);
+    text-align: center;
+    font: normal normal bold 32px/44px Bahnschrift;
+    letter-spacing: 6.4px;
+    color: #707070;
+    text-transform: uppercase;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-action-container {
+    display:none;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.preview-action-btm-btn {
+    /* width: 360px; */
+    height: 72px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--unnamed-color-ffffff);
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-24)/var(--unnamed-line-spacing-34) var(--unnamed-font-family-bahnschrift);
+    letter-spacing: var(--unnamed-character-spacing-4-8);
+    color: var(--unnamed-color-000000);
+    text-align: center;
+    font: normal normal bold 24px/34px Bahnschrift;
+    letter-spacing: 4.8px;
+    color: #000000;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 0 1.5rem;
+}

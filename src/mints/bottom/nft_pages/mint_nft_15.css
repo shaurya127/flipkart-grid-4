@@ -1,0 +1,38 @@
+.autorize{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: auto;
+    margin-top: 50px;
+    width: 80%;
+    height: 90px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 6px;
+    opacity: 0.6;
+    text-align: center;
+    font: normal normal normal 24px/50px Bahnschrift;
+    letter-spacing: 7.2px;
+    color: #0C0C0C;
+    text-transform: uppercase;
+}
+.click_here{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    font: normal normal normal 18px/34px Bahnschrift;
+    letter-spacing: 4.8px;
+    color: #E6E6E6;
+    opacity: 1;
+}
+.centr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

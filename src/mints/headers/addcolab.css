@@ -1,0 +1,98 @@
+
+#centol {
+     /* need to remove this*/
+    margin-top: 40px;   
+    margin-left: 100px;
+    display: inline-flexbox;
+  }
+
+  .switch {
+    margin-left: -450px;  
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 10px;
+  }
+    
+
+  input:checked + .slider {
+    background-color: white;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  .circle {
+    display: inline-block;
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #1A1A1A;
+    text-align: center;
+    background: #E6E6E6
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    width: 40px;
+    height: 20px;
+    border-radius: 34px;
+  }
+  
+  .headerinline{
+    white-space: nowrap;
+    display: inline;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  .row > form {
+    margin-top: 40px;
+    width: 300px;
+    height: 20px;
+    display: inline-block;
+  }
+
+  .addmore{
+      margin-top: 60px;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #E6E6E6 0% 0% no-repeat padding-box;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 1px;
+    background-color: #1A1A1A;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .headi{
+    margin-left: 40px;
+    text-align: center;
+    font: normal normal normal 24px Bahnschrift;
+    letter-spacing: 7.2px;
+    color: #E6E6E6;
+    opacity: 1;
+    text-transform: uppercase;
+  }

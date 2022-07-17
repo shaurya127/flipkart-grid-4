@@ -1,0 +1,44 @@
+.toggle-switch {
+  position: absolute;
+  right: 10px;
+}
+
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+.toggle-switch label {
+  cursor: pointer;
+}
+.toggle-switch label .toggle-track {
+  display: block;
+  height: 15px;
+  width: 30px;
+  background: black;
+  border-radius: 20px;
+  position: relative;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+}
+
+.toggle-switch .toggle-track:before {
+  content: "";
+  display: inline-block;
+  height: 9px;
+  width: 9px;
+  background: white;
+  border-radius: 20px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  transition: right 0.2s ease-in;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label .toggle-track:before {
+  background: white;
+  right: 18px;
+}
+
+.buy-now {
+  font-size: 1.25rem;
+  margin-top: -0.5rem;
+}

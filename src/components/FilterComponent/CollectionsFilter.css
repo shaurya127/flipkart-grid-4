@@ -1,0 +1,72 @@
+.search-drop-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem;
+  flex-wrap: wrap;
+}
+
+.search-input-container {
+  /* width: 1658px;
+    height: 80px;
+    background: #363636 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    opacity: 0.4; */
+  /* background: #363636 0% 0% no-repeat padding-box; */
+  opacity: 0.4;
+}
+
+.search-input {
+  width: 110%;
+  height: 57px;
+  border: none;
+  /* background-color: transparent; */
+  background: rgba(48, 48, 48, 0.3);
+  border-radius: 5px;
+  font: var(--unnamed-font-style-normal) normal 300 var(--unnamed-font-size-20);
+  letter-spacing: var(--unnamed-character-spacing-4-8);
+  color: grey;
+  text-align: left;
+}
+.loadmore {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 25px;
+
+  position: static;
+  width: 124px;
+  height: 37px;
+  left: 131.5px;
+  top: 768px;
+
+  background: linear-gradient(
+    89.95deg,
+    #5d70b3 0.02%,
+    rgba(109, 125, 182, 0.840625) 16.22%,
+    rgba(92, 175, 185, 0.958132) 87.65%,
+    rgba(86, 193, 186, 0.5) 101.62%
+  );
+  border-radius: 10px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 9;
+  flex-grow: 0;
+  margin: 20px 0px;
+  margin-left: 2.8rem;
+}
+.search-input::placeholder {
+  letter-spacing: var(--unnamed-character-spacing-4-8);
+  color: var(--unnamed-color-ffffff);
+  text-align: left;
+  /* font: normal normal 300 24px/34px Bahnschrift; */
+  letter-spacing: 4px;
+  color: grey;
+  text-transform: uppercase;
+  font-family: FontAwesome;
+  /* opacity: 0.1; */
+  padding: 1rem;
+}

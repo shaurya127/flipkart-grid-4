@@ -1,0 +1,84 @@
+.drop-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 3rem;
+    flex-wrap: wrap;
+}
+
+.drop-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 5rem;
+}
+
+.drop-label {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-36)/var(--unnamed-line-spacing-50) var(--unnamed-font-family-bahnschrift);
+    color: var(--unnamed-color-707070);
+    text-align: left;
+    font: normal normal normal 36px/50px Bahnschrift;
+    letter-spacing: 14.4px;
+    color: #707070;
+    opacity: 1;
+    margin-right: 2rem;
+}
+
+.drop-select-container {
+    background: #363636 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    opacity: 0.4;
+}
+
+.drop-select-container {
+    width: 279px;
+    background: #363636 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    /* color: #FFFFFF; */
+    /* opacity: 0.4; */
+}
+
+.drop-down-select {
+    /* background: transparent; */
+    background: #363636 0% 0% no-repeat padding-box;
+    color: #d6d6d6;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-36)/var(--unnamed-line-spacing-50) var(--unnamed-font-family-bahnschrift);
+    color: var(--unnamed-color-ffffff);
+    text-align: left;
+    font: normal normal bold 1.2rem/2rem Bahnschrift;
+    letter-spacing: 1rem;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.drop-select {
+    width: 100%;
+    background: transparent;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-36)/var(--unnamed-line-spacing-50) var(--unnamed-font-family-bahnschrift);
+    /* color: var(--unnamed-color-ffffff); */
+    /* text-align: left; */
+    /* font: normal normal bold 1.2rem/2rem Bahnschrift; */
+    /* letter-spacing: 1rem; */
+    /* color: #FFFFFF; */
+    opacity: 1;
+}
+
+.drop-option {
+    /* width: 164px;
+    height: 36px; */
+
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-36)/var(--unnamed-line-spacing-50) var(--unnamed-font-family-bahnschrift);
+    color: var(--unnamed-color-ffffff);
+    text-align: left;
+    font: normal normal bold 1.2rem/2rem Bahnschrift;
+    letter-spacing: 1rem;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.drop-option:hover {
+    /* color: #000000; */
+    background-color: transparent;
+
+}
