@@ -121,7 +121,7 @@ const NavBar = (props) => {
               <NavLink to="/" activeClassName="active">
                 <div style={{ textDecoration: "none" }}>Home</div>
               </NavLink>
-              <NavLink to="/assets/create">
+              <NavLink to="/add-product">
                 <div style={{ textDecoration: "none" }}>Add Product</div>
               </NavLink>
 
@@ -209,7 +209,7 @@ const NavBar = (props) => {
                   <button className="dropbtn">Product</button>
                 </div>
               </NavLink>
-              <NavLink to="/assets/create" style={{ color: "#FFF" }}>
+              <NavLink to="/add-product" style={{ color: "#FFF" }}>
                 <div style={{ textDecoration: "none" }}>Add Product</div>
               </NavLink>
 

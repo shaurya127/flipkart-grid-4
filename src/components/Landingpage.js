@@ -181,7 +181,7 @@ const Landingpage = (props) => {
             <div style={{ display: "flex", marginTop: "2rem" }}>
 
               <a href="/allnft" style={{ textDecoration: "none", color: "white" }}><Transparentbtn >Explore Product</Transparentbtn></a>
-              <a href="/assets/create" style={{ textDecoration: "none", color: "white" }}><Transparentbtn style={{ marginLeft: "2rem" }}>
+              <a href="/add-product" style={{ textDecoration: "none", color: "white" }}><Transparentbtn style={{ marginLeft: "2rem" }}>
                 Create Product
               </Transparentbtn></a>
 
