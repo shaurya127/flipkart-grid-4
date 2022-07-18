@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from 'antd';
+import { Button } from "antd";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import { fetchItemMetaData, getNftById } from '../../store/item/action';
+import { fetchItemMetaData, getNftById } from "../../store/item/action";
 import { nftmarketaddress, nftaddress } from "../../config";
 import Market from "../../ethereum/Marketplace.json";
 import NFT from "../../ethereum/NFT.json";
@@ -18,15 +18,16 @@ import { useParams } from "react-router-dom";
 import "../../../node_modules/video-react/dist/video-react.css"; // import css
 import Landingowner from "../../assets/images/landingowner.png";
 import Eth from "../../assets/images/Ethereum (ETH).png";
-import { Spin, Avatar } from 'antd';
-import { fetchOngoingBids } from '../../store/item';
+import { Spin, Avatar } from "antd";
+import { fetchOngoingBids } from "../../store/item";
 import { sendTransaction } from "../../components/sendTransaction";
+import { fs } from "../../firebase";
 
 const Splitscreen = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height:100rem;
+  height: 100rem;
   @media (max-width: 1000px) {
     flex-direction: column;
     overflow-y: hidden;
@@ -61,11 +62,15 @@ const Right = styled.div`
   }
 `;
 
-
 const Biddingcard = styled.div`
-background: linear-gradient(180deg, rgba(0, 0, 0, 0.11) 0%, rgba(0, 0, 0, 0.53125) 48.96%, rgba(55, 55, 55, 0.8) 100%);
-opacity: 0.75;
-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.32);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.11) 0%,
+    rgba(0, 0, 0, 0.53125) 48.96%,
+    rgba(55, 55, 55, 0.8) 100%
+  );
+  opacity: 0.75;
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.32);
   border-radius: 24px;
   display: flex;
   align-items: center;
@@ -76,9 +81,14 @@ box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.32);
   margin-top: 0.7rem;
 `;
 const Biddingcard1 = styled.div`
-background: linear-gradient(180deg, rgba(0, 0, 0, 0.11) 0%, rgba(0, 0, 0, 0.53125) 48.96%, rgba(55, 55, 55, 0.8) 100%);
-opacity: 0.75;
-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.32);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.11) 0%,
+    rgba(0, 0, 0, 0.53125) 48.96%,
+    rgba(55, 55, 55, 0.8) 100%
+  );
+  opacity: 0.75;
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.32);
   border-radius: 24px;
   display: flex;
   align-items: center;
@@ -87,13 +97,14 @@ box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.32);
   width: 100%;
   margin-left: 0;
   margin-top: 0.7rem;
-  margin-bottom:.5rem;
+  margin-bottom: 0.5rem;
 `;
 const Mainheading = styled.div`
-font-style: normal;
-font-weight: 600;
-font-size: 2.3rem;
-line-height: 140%;`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.3rem;
+  line-height: 140%;
+`;
 
 const Borderbtn = styled(Button)`
   cursor: pointer;
@@ -119,42 +130,85 @@ const Borderbtn = styled(Button)`
 `;
 
 const Desctext = styled.div`
-font-style: normal;
-font-weight: normal;
-font-size: 1rem;
-line-height: 160%;
-color: #A9A9A9;`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 160%;
+  color: #a9a9a9;
+`;
 
 const Biddingtext = styled.div`
-font-style: normal;
-font-weight: 600;
-font-size: 1.5rem;
-line-height: 140%;
-margin-top:1rem;`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 140%;
+  margin-top: 1rem;
+`;
 
 const Leftheading = styled.div`
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-margin-top:3rem;
-color: #A9A9A9;
-line-height:0.5rem;
-`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  margin-top: 3rem;
+  color: #a9a9a9;
+  line-height: 0.5rem;
+`;
 
 const Lefttext = styled.div`
-font-style: normal;
-font-size: 18px;
-line-height:1;
-`
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1;
+`;
 
-const createURI = (uri) => uri.slice(0, 7) === "ipfs://" ? 'https://ipfs.infura.io/ipfs/' + uri.slice(7) : uri;
+const createURI = (uri) =>
+  uri.slice(0, 7) === "ipfs://"
+    ? "https://ipfs.infura.io/ipfs/" + uri.slice(7)
+    : uri;
 
 const ItemDescription = () => {
   const dispatch = useDispatch();
-  const metaData = useSelector(state => state.item.itemData);
-  const loadingState = useSelector(state => state.item.itemDataLoading);
+  const metaData = useSelector((state) => state.item.itemData);
+
   const [Properties, setProperties] = useState([]);
   const { collection, id } = useParams();
+  console.log(id);
+
+  const [data, setData] = useState([]);
+  const [productdata, setProductdata] = useState([]);
+  const [loadingState, setLoadingState] = useState("not-loaded");
+
+  // fetch data from firebase Products collection
+
+  const fetchProductData = async () => {
+    const citiesRef = fs.collection("Products").doc(id);
+    const snapshot = await citiesRef.get();
+    const data = snapshot.data();
+    setProductdata(data);
+    setLoadingState("loaded");
+    if (snapshot.empty) {
+      console.log("No matching documents.");
+      return;
+    }
+
+    // snapshot.forEach((doc) => {
+    //   setProductdata(doc.data());
+    //   // console.log(doc.id, "=>", doc.data());
+
+    //   // setProductdata((productdata) => [...productdata, devdata]);
+    //   setLoadingState("loaded");
+    // });
+  };
+  useEffect(() => {
+    fetchProductData();
+  }, []);
+
+  console.log(productdata);
+  // console.log(productdata[0].title);
+  // console.log(productdata[0].price);
+  // console.log(productdata[0].url);
+  // console.log(productdata[0].description);
+  // console.log(productdata[0].Quantity);
+  // console.log(productdata[0].sellerAddress);
 
   //itemid = itemid.toNumber();
   // var token_address = ethers.BigNumber.from(item1);
@@ -162,9 +216,12 @@ const ItemDescription = () => {
   // console.log(collection,id);
 
   useEffect(() => {
-    dispatch(getNftById({
-      ownerAddr: collection, tokenId: id
-    }));
+    dispatch(
+      getNftById({
+        ownerAddr: collection,
+        tokenId: id,
+      })
+    );
   }, [dispatch, collection, id]);
 
   useEffect(() => {
@@ -201,344 +258,200 @@ const ItemDescription = () => {
     }
   }
 
-  console.log(metaData.metadata);
-  if (loadingState) {
+  if (loadingState !== "loaded") {
     return (
       <div
-        style={{ minHeight: "100vh", alignContent: "center", marginBottom: "100px", justifyContent: 'center' }}
+        style={{
+          minHeight: "100vh",
+          alignContent: "center",
+          marginBottom: "100px",
+          justifyContent: "center",
+        }}
       >
-        <div style={{ minHeight: '100vh', display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <div
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Spin size="large" />
         </div>
       </div>
     );
   }
+
   return (
     <>
-      {metaData && <Splitscreen style={{ paddingTop: "10rem" }}>
-        <Left>
-          <div
-            style={{
-              padding: "2rem",
-              paddinTop: "0",
-              marginTop: "0",
-              height: "100%",
-              width: "80%",
-              borderRadius: "10px",
-              display: "flex",
-              alignItems: "start",
-              justifyContent: "start",
-              paddingBottom: "0",
-              overflow: "hidden",
-              flexDirection: "column",
-              textAlign: "left"
-            }}
-          >
-            {/* {obj.file=="mp4"?<Player src={obj.image}></Player>:  */}
-            {metaData && <Zoom>
-              <img
-                src={createURI(metaData.metadata.image)}
-                alt="nft"
-                style={{
-                  width: "100%",
-                  borderRadius: "15px",
-                  height: "70vh",
-                  objectFit: "cover",
-                }}
-              />
-            </Zoom>}
-
-            <div style={{ marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Avatar
-                size={{ xs: 24, sm: 32, md: 30, lg: 40, xl: 55, xxl: 100 }}
-                src="https://joeschmoe.io/api/v1/random"
-              />
-              <Link to={`/profile/${metaData.owner_of}`}>
-                <Lefttext style={{ color: "#A9A9A9" }}>created by <br />
-                  {metaData.owner_of}
-                </Lefttext>
-              </Link>
-            </div>
-            <div style={{ color: "white", }}>
-              <Leftheading>Contract Address</Leftheading>
-              <br />
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
-                <Lefttext>{metaData.contract["address"]}</Lefttext>
-                {/* <Borderbtn>Copy address</Borderbtn> */}
-              </div>
-            </div>
-            <div style={{ color: "white" }}>
-              <Leftheading>Token Id</Leftheading>
-              <br />
-              <Lefttext>{metaData.id["tokenId"]}</Lefttext>
-            </div>
-
-          </div>
-        </Left>
-        <Right>
-          <p
-            style={{
-              color: "white",
-              fontSize: "26px",
-              letterSpacing: "2px",
-              width: "100%",
-              marginTop: "1.3rem",
-              textAlign: "left",
-            }}
-          >
-            {/* {metaData && <Mainheading>{metaData.title}</Mainheading>} */}
-            <br />
-            <Mainheading className="text-muted">Description</Mainheading>
-            {metaData && <Desctext>
-              {/* {metaData.description} */}
-            </Desctext>}
-            {/* {obj.name} */}
-          </p>
-          <div
-            style={{
-              width: "90%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+      {productdata && (
+        <Splitscreen style={{ paddingTop: "10rem" }}>
+          <Left>
             <div
               style={{
-                marginTop: "0.5rem",
-                color: "white",
+                padding: "2rem",
+                paddinTop: "0",
+                marginTop: "0",
+                height: "100%",
+                width: "80%",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "start",
+                justifyContent: "start",
+                paddingBottom: "0",
+                overflow: "hidden",
+                flexDirection: "column",
                 textAlign: "left",
-                height: "4rem",
               }}
             >
-              <Biddingtext>Current Price</Biddingtext>
+              {productdata && (
+                <Zoom>
+                  <img
+                    src={productdata.url}
+                    alt="nft"
+                    style={{
+                      width: "100%",
+                      borderRadius: "15px",
+                      height: "70vh",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Zoom>
+              )}
+
               <div
                 style={{
-                  background: "black",
-                  width: "15rem",
-                  height: "4rem",
-                  borderRadius: "0.7rem",
+                  marginTop: "1rem",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "space-between",
-                  padding: "1rem 1rem",
-                  fontSize: ".7rem",
-                  fontWeight: "500",
-                  marginTop: "1rem"
+                  justifyContent: "center",
                 }}
               >
-                <div style={{ display: "flex" }}>
-                  <img src={Eth} alt="" />
-                  <div style={{ marginLeft: "0.4rem" }}>0.99 ETH</div>
-                </div>
-                <div
-                  style={{ background: "#229CEA", padding: ".7rem", borderRadius: "0.5rem", cursor: "pointer" }}
-                  onClick={() => buyNft()}
-                >
-                  Buy now
-                </div>
-              </div>
-            </div>
-            <div
-              style={{
-                marginTop: "0.5rem",
-                color: "white",
-                textAlign: "left",
-                height: "4rem",
-              }}
-            >
-              <Biddingtext>Bid ends in</Biddingtext>
-              <div
-                style={{
-                  background: "black",
-                  width: "15rem",
-                  height: "4rem",
-                  borderRadius: "0.7rem",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  padding: "1rem 1rem",
-                  fontSize: ".7rem",
-                  fontWeight: "500",
-                  marginTop: "1rem"
-                }}
-              >
-                <div style={{ display: "flex" }}>
-                  <img src={Eth} alt="" />
-                  <div style={{ marginLeft: "0.4rem" }}>4d 16h 32m 10s</div>
-                </div>
-                <Borderbtn
-                  onClick={() => {
-                    console.log('click on the bid button');
-                  }}
-                >Place bid </Borderbtn>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              textAlign: "left",
-              flexDirection: "column",
-              color: "white",
-              marginTop: "5rem"
-            }}
-          >
-            <Biddingtext>Ongoing Bids</Biddingtext>
-
-            <Biddingcard>
-              <div
-                style={{
-                  //   marginTop: "1.4rem",
-                  display: "flex",
-                  alignItems: "center",
-                  marginLeft: "2rem",
-                  height: "100%",
-                }}
-              >
-                <img
-                  style={{ objectFit: "contain", width: "5rem" }}
-                  src={Landingowner}
-                  alt="landingimg"
+                <Avatar
+                  size={{ xs: 24, sm: 32, md: 30, lg: 40, xl: 55, xxl: 100 }}
+                  src="https://joeschmoe.io/api/v1/random"
                 />
+                <Link to={`/profile/${productdata.sellerAddress}`}>
+                  <Lefttext style={{ color: "#A9A9A9" }}>
+                    created by <br />
+                    {productdata.sellerAddress}
+                  </Lefttext>
+                </Link>
+              </div>
+              <div style={{ color: "white" }}>
+                <Leftheading>Contract Address</Leftheading>
+                <br />
                 <div
                   style={{
-                    width: "80%",
-                    textAlign: "left",
-                    marginLeft: "2rem",
-                    color: "#A9A9A9"
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   }}
                 >
-                  <div style={{ fontSize: "1rem", fontWeight: "normal" }}>
-                    By woodshelf
+                  <Lefttext>{productdata.sellerAddress}</Lefttext>
+                </div>
+              </div>
+              <div style={{ color: "white" }}>
+                <Leftheading>Token Id</Leftheading>
+                <br />
+                <Lefttext>{id}</Lefttext>
+              </div>
+            </div>
+          </Left>
+          <Right>
+            <p
+              style={{
+                color: "white",
+                fontSize: "26px",
+                letterSpacing: "2px",
+                width: "100%",
+                marginTop: "1.3rem",
+                textAlign: "left",
+              }}
+            >
+              {/* {metaData && <Mainheading>{metaData.title}</Mainheading>} */}
+              <br />
+              <Mainheading className="text-muted">Description</Mainheading>
+              {productdata && <Desctext>{productdata.description}</Desctext>}
+              {/* {obj.name} */}
+            </p>
+            <div
+              style={{
+                width: "90%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div
+                style={{
+                  marginTop: "0.5rem",
+                  color: "white",
+                  textAlign: "left",
+                  height: "4rem",
+                }}
+              >
+                <Biddingtext>Current Price</Biddingtext>
+                <div
+                  style={{
+                    background: "black",
+                    width: "15rem",
+                    height: "4rem",
+                    borderRadius: "0.7rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "1rem 1rem",
+                    fontSize: ".7rem",
+                    fontWeight: "500",
+                    marginTop: "1rem",
+                  }}
+                >
+                  <div style={{ display: "flex" }}>
+                    <img src={Eth} alt="" />
+                    <div style={{ marginLeft: "0.4rem" }}>
+                      {productdata.price}
+                    </div>
                   </div>
-                  <div style={{ fontSize: "1rem", marginTop: "1rem" }}>
-                    Bid at 20Eth
+                  <div
+                    style={{
+                      background: "#229CEA",
+                      padding: ".7rem",
+                      borderRadius: "0.5rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Buy now
                   </div>
                 </div>
               </div>
-              <div>
-                <div
-                  style={{
-                    width: "80%",
-                    textAlign: "left",
-                    marginRight: "2rem",
-                    height: "100%",
-                    color: "#A9A9A9",
-                  }}
-                >
-                  <div style={{ fontSize: "1rem" }}>
-                    365 ETH
-                  </div>
-                  <div style={{ fontSize: "0.9rem", marginTop: "1rem" }}>
-                    11:46AM
-                  </div>
-                </div>
+              <div
+                style={{
+                  marginTop: "0.5rem",
+                  color: "white",
+                  textAlign: "left",
+                  height: "4rem",
+                }}
+              >
               </div>
-            </Biddingcard>
+            </div>
 
-          </div>
-
-
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              textAlign: "left",
-              flexDirection: "column",
-              color: "white",
-              marginTop: "5rem",
-            }}
-          >
-            <Biddingtext>Properties</Biddingtext>
-
-            {metaData.metadata.attributes.map((property, index) => {
-              return (
-                <div key={index} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "80px" }}>
-                  <Biddingcard1>
-                    <div
-                      style={{
-                        //   marginTop: "1.4rem",
-                        display: "flex",
-                        alignItems: "center",
-                        // marginLeft: "2rem",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "80%",
-                          textAlign: "left",
-                          marginLeft: "2rem",
-                          color: "#A9A9A9"
-                        }}
-                      >
-                        <div style={{ fontSize: "1rem", fontWeight: "normal" }}>
-                          {property.trait_type}
-                        </div>
-                        <div style={{ fontSize: "1rem", marginTop: "1rem", color: "white" }}>
-                          {property.value}
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        //   marginTop: "1.4rem",
-                        display: "flex",
-                        alignItems: "center",
-                        marginLeft: "2rem",
-                        height: "100%",
-                      }}
-                    >
-
-                      <div
-                        style={{
-                          width: "80%",
-                          textAlign: "left",
-                          marginLeft: "2rem",
-                          color: ""
-                        }}
-                      >
-                        <div style={{ fontSize: "1rem", fontWeight: "normal" }}>
-                          26.8
-                        </div>
-
-                      </div>
-                    </div>
-                    <div>
-                      <div
-                        style={{
-                          width: "80%",
-                          textAlign: "left",
-                          marginRight: "2rem",
-                          height: "100%",
-                          color: "#A9A9A9",
-                        }}
-                      >
-                        <div style={{ fontSize: "1rem" }}>
-                          1990(19.9%)
-                        </div>
-
-                      </div>
-                    </div>
-                  </Biddingcard1>
-                  {/* <Lefttext>{property.trait_type}</Lefttext> */}
-                </div>
-              );
-            })}
-
-
-          </div>
-        </Right>
-      </Splitscreen>}
-      {/* <Footer /> */}
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                textAlign: "left",
+                flexDirection: "column",
+                color: "white",
+                marginTop: "5rem",
+              }}
+            ></div>
+          </Right>
+        </Splitscreen>
+      )}
     </>
   );
 };
-
-// const ItemDescription = () => <h1>Thisjisjlkajlskj</h1>
-
 
 export default ItemDescription;

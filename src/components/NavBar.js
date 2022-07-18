@@ -17,6 +17,8 @@ import { Menu, Button, Dropdown } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import web3 from "web3";
 import "antd/dist/antd.css";
+// import logo1 from "../assets/product-images/logo1.png";
+// import logo2 from "../assets/product-images/logo2.png";
 
 const SubMenu = Menu;
 export const GradientButton = styled.div`
@@ -134,11 +136,7 @@ const NavBar = (props) => {
             </ul>
           </div>
 
-          {/* <div>
-            <NavLink to="/">
-              <img src={Home} alt="logo" style={{ height: "3rem" }} />
-            </NavLink>
-          </div> */}
+          
         </nav>
       </Navdiv>
       <Navdivdesktop
@@ -168,18 +166,25 @@ const NavBar = (props) => {
           >
             <NavLink to="/">
               <div style={{ width: "10px", marginLeft: "5.5rem" }}>
-                <h1
-                  style={{
+                <h1 style={{
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  color: "white",
+                  marginLeft: "1rem",
+                  
+                }}>Import win</h1>
+                {/* <img src={logo1} alt="home" style={{
                     fontSize: "2rem",
                     fontWeight: "bold",
                     color: "white",
                     width: "18rem",
                     marginTop: "0.5rem",
                     marginLeft: "-15px",
-                  }}
-                >
-                  Import Win
-                </h1>
+                  }} /> */}
+                  
+                
+                 
+                
                 
               </div>
             </NavLink>
@@ -197,13 +202,7 @@ const NavBar = (props) => {
                 textDecoration: "none",
               }}
             >
-              {/* <NavLink
-                to="/"
-                activeStyle={{ color: "red" }}
-                style={{ color: "white" }}
-              >
-                Home
-              </NavLink> */}
+              
               <NavLink to="/about">
                 <div className="dropdown">
                   <button className="dropbtn">Product</button>

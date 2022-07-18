@@ -7,6 +7,7 @@ import Card3 from "../assets/images/card2.png";
 import PageHeader from "../components/PageHeader";
 import Createsell from "../assets/images/createsell.png";
 import { Link } from "react-router-dom";
+
 const Formlabel = styled.label`
   left: 16.51%;
   right: 78.49%;
@@ -27,12 +28,14 @@ const Formlabel = styled.label`
 
 const Button1 = styled.div`
   width: 221px;
+  custom-property: 0px;
+  cursor: pointer;
   height: 47px;
   border: 2px solid;
   border-image-slice: 1;
   border-width: 2px;
-  background-color: black;
-  color: #f1f1f1;
+  background-color: white;
+  color: black;
   border-radius: 30px;
   font-style: normal;
   font-weight: bold;
@@ -84,7 +87,6 @@ const Formfilltxtdocs = styled.input`
   font: normal normal 300 24px/34px Bahnschrift;
   letter-spacing: 4.8px;
   color: #ffffff;
-  text-transform: uppercase;
   border: 2px solid white;
   border-radius: 2px solid red;
   margin-bottom: 20px;
@@ -101,7 +103,9 @@ const Formfilltxt2 = styled.textarea`
   margin-bottom: 20px;
   margin-top: 20px;
   background: #363636;
+  color: #ffffff;
   border-radius: 6px;
+
   height: 90px;
   border: none;
 `;
@@ -178,6 +182,8 @@ const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [Quantity, setQuantity] = useState("");
+  const [sellerAddress, setSellerAddress] = useState("");
   const [image, setImage] = useState(null);
 
   const [imageError, setImageError] = useState("");
@@ -185,7 +191,14 @@ const AddProduct = () => {
   const [successMsg, setSuccessMsg] = useState("");
   const [uploadError, setUploadError] = useState("");
 
-  const types = ["image/jpg", "image/jpeg", "image/png", "image/PNG"];
+  const types = [
+    "image/jpg",
+    "image/jpeg",
+    "image/png",
+    "image/PNG",
+    "image/avif",
+    "image/webp",
+  ];
   const handleProductImg = (e) => {
     let selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -202,8 +215,18 @@ const AddProduct = () => {
   };
 
   const handleAddProducts = (e) => {
+    if (
+      title === "" ||
+      description === "" ||
+      price === "" ||
+      Quantity === "" ||
+      sellerAddress === "" ||
+      image === null
+    ) {
+      alert("Please fill all the fields");
+    }
     e.preventDefault();
-    console.log(title, description, price);
+    console.log(title, description, price, Quantity, sellerAddress);
     console.log(image);
     const uploadTask = storage.ref(`product-images/${image.name}`).put(image);
     uploadTask.on(
@@ -225,6 +248,8 @@ const AddProduct = () => {
                 title,
                 description,
                 price: Number(price),
+                Quantity: Number(Quantity),
+                sellerAddress,
                 url,
               })
               .then(() => {
@@ -232,12 +257,16 @@ const AddProduct = () => {
                 setTitle("");
                 setDescription("");
                 setPrice("");
+                setQuantity("");
+                setSellerAddress("");
                 document.getElementById("file").value = "";
                 setImageError("");
                 setUploadError("");
                 setTimeout(() => {
                   setSuccessMsg("");
+                  alert("Product added successfully");
                 }, 3000);
+                // show a alert if the product is added successfully
               })
               .catch((error) => setUploadError(error.message));
           });
@@ -387,21 +416,41 @@ const AddProduct = () => {
             value={title}
             style={{ width: "100%" }}
           />
-          <Formlabel2 className="formlable2">Description</Formlabel2>
+          <Formlabel2 className="formlable">Description</Formlabel2>
           <Formfilltxt2
-            className="formtxtfill2"
+            className="formtxtfill docs"
             rows="1"
             cols="10"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
             style={{ width: "100%" }}
           ></Formfilltxt2>
-          <Formlabel className="formlable">Price in WETH </Formlabel>
+          <Formlabel className="formlable">Price </Formlabel>
           <Formfilltxtdocs
             className="formtxtfill docs"
             type="text"
             onChange={(e) => setPrice(e.target.value)}
             value={price}
+            style={{ width: "100%" }}
+            required
+          />
+
+          <Formlabel className="formlable">Quantity </Formlabel>
+          <Formfilltxtdocs
+            className="formtxtfill docs"
+            type="text"
+            onChange={(e) => setQuantity(e.target.value)}
+            value={Quantity}
+            style={{ width: "100%" }}
+            required
+          />
+
+          <Formlabel className="formlable">Seller Address </Formlabel>
+          <Formfilltxtdocs
+            className="formtxtfill docs"
+            type="text"
+            onChange={(e) => setSellerAddress(e.target.value)}
+            value={sellerAddress}
             style={{ width: "100%" }}
             required
           />
@@ -424,7 +473,7 @@ const AddProduct = () => {
             width: "50%",
           }}
         >
-          <img
+          {/* <img
             style={{
               objectFit: "contain",
               width: "576px",
@@ -432,7 +481,7 @@ const AddProduct = () => {
             }}
             src={image}
             alt="pre"
-          />
+          /> */}
           ) ) : (
           <div
             style={{
@@ -457,9 +506,7 @@ const AddProduct = () => {
           </div>
         </div>
       </view>
-      <Button1 className="digitalbutton" onClick={handleAddProducts}>
-        <div style={{ color: "white" }}>Create Digital Asset</div>
-      </Button1>
+      <Button1 onClick={handleAddProducts}>Add Product</Button1>
     </div>
   );
 };

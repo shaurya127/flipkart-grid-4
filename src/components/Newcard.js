@@ -69,24 +69,12 @@ const Btn = styled.div`
 `;
 
 const LandingCard = (props) => {
-  // const [image, setImage] = useState('');
-
-  // const fetchImage = async () => {
-  //   const token_metadata = await axios.get(props.image);
-  //   const image = token_metadata.data.image;
-  //   setImage(image);
-
-  // }
-
-  // useEffect(()=>{
-  //   // fetchImage();
-  //   console.log(props.image)
-  // })
-  const p = props.image && props.image.image && props.image.image.slice(0,7) === "ipfs://" ? 'https://ipfs.infura.io/ipfs/' + props.image.image.slice(7) : props.image?.image;
-  console.log(p);
+ 
+  const p = props.image; 
+  // console.log(p);
   return (
     <Landingdiv>
-      {/* <img src={image} alt="image" /> */}
+    
       <Imagecont style={{
         background: `url(${p})`,
         backgroundSize: "cover"
@@ -101,11 +89,11 @@ const LandingCard = (props) => {
             padding: "1rem 1rem",
           }}
         >
-          <Btn>Place bid</Btn>
+          {/* <Btn>Place bid</Btn>
           <Btn>
             <img src={Heart} alt="like" />
             <div>365</div>
-          </Btn>
+          </Btn> */}
         </div>
       </Imagecont>
       <div style={{ marginTop: "3vh", display: "flex", alignItems: "center",height:"8vh" }}>
@@ -116,9 +104,9 @@ const LandingCard = (props) => {
         /> */}
         <div style={{ width: "80%", textAlign: "left", marginLeft: "1rem" }}>
           <div style={{ fontSize: "1rem", fontWeight: "bold" }}>{props.name || <Skeleton />}</div>
-          {/* <div className="text-truncate" style={{ color: "#A9A9A9", fontSize: "0.7rem" }}>
-            created by {props.owner || <Skeleton />}
-          </div> */}
+          <div className="text-truncate" style={{ color: "#A9A9A9", fontSize: "0.7rem" }}>
+            Seller:  {props.owner}
+          </div>
         </div>
       </div>
       <div style={{ width: "100%", marginTop: "0.5rem" }}>
@@ -137,10 +125,14 @@ const LandingCard = (props) => {
           }}
         >
           <div style={{ display: "flex" }}>
-            <img src={Eth} alt="" />
-            <div style={{ marginLeft: "0.4rem" }}>{props.symbol || <Skeleton count={10}/>}</div>
+           
+            <div style={{ marginLeft: "0.4rem" }}>Quantity: {props.Quantity}</div>
           </div>
-          {/* <div>Bid 12 ETH</div> */}
+          <div style={{ display: "flex" }}>
+            <div style={{ marginRight: "0.4rem" }}>Price: {props.price}</div>
+            
+          </div>
+          
         </div>
       </div> 
     </Landingdiv>

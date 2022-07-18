@@ -21,3 +21,8 @@ const fs = firebase.firestore();
 const storage = firebase.storage();
 
 export {auth,fs,storage}
+
+
+
+            
+       

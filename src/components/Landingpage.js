@@ -13,7 +13,8 @@ import Card3 from "../assets/images/card2.png";
 import Trendingcardsmall from "./Trendingcardsmall";
 import TopCollectionCard from "./TopCollectionCard";
 import Loader from "react-loader-spinner";
-import { Spin, Space } from 'antd';
+import { Spin, Space } from "antd";
+import { fs } from "../firebase";
 
 const ImageContainer = styled.div`
   background: url(${Fundingimg});
@@ -33,7 +34,6 @@ const ImageContainer = styled.div`
   padding-top: 11rem;
 `;
 
-
 const Transparentbtn = styled.div`
   border: 1px solid #f1f1f1;
   box-sizing: border-box;
@@ -44,7 +44,6 @@ const Transparentbtn = styled.div`
   padding: 0.5rem 2.9rem;
   cursor: pointer;
 `;
-
 
 const HeadingText = styled.div`
   font-style: normal;
@@ -73,51 +72,95 @@ const Createmaint = styled.div`
 `;
 
 const Trendingimagetext = styled.div`
-height:100%;
-width:100%;
-display:flex;
-padding:2rem;
-padding-top:1.5rem;
-`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 2rem;
+  padding-top: 1.5rem;
+`;
 
 const Cardtext = styled.div`
-background: rgba(0, 0, 0, 0.6);
-border-radius: 5px;
-font-style: normal;
-font-weight: bold;
-font-size: .7rem;
-line-height: 1.5rem;
-color: #FFFFFF;
-width:max-content;
-padding:1rem;
-height:2rem;
-display:flex;
-align-items:center;
-`
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.7rem;
+  line-height: 1.5rem;
+  color: #ffffff;
+  width: max-content;
+  padding: 1rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+`;
 const Landingpage = (props) => {
-
   const [data, setData] = useState([]);
+  const [productdata, setProductdata] = useState( []);
   const [loadingState, setLoadingState] = useState("not-loaded");
+
+  // fetch data from firebase Products collection
+  const fetchProductData = async () => {
+    const citiesRef = fs.collection("Products");
+    const snapshot = await citiesRef.get();
+    if (snapshot.empty) {
+      console.log("No matching documents.");
+      return;
+    }
+
+    snapshot.forEach((doc) => {
+      var devdata={};
+      devdata.id=doc.id;
+      devdata.data=doc.data();
+      // console.log(doc.id, "=>", doc.data());
+
+      setProductdata((productdata) => [...productdata, devdata]);
+      setLoadingState("loaded");
+    });
+  };
+  useEffect(() => {
+    fetchProductData();
+  }, []);
+
+  // console.log(productdata[0]);
+  // console.log(productdata[0].title);
+  // console.log(productdata[0].price);
+  // console.log(productdata[0].url);
+  // console.log(productdata[0].description);
+  // console.log(productdata[0].Quantity);
+  // console.log(productdata[0].sellerAddress);
 
   const fetchData = async () => {
     const collectionTop = [
-      '0x59468516a8259058bad1ca5f8f4bff190d30e066',
-      '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
-      '0x90b2baca772f677f0eff93a844fa70d19fbbd46a',
-      
-    ]
-    const collectionTopArr = [...collectionTop, ...collectionTop, ...collectionTop] // To collect data of 5 NFTs
-    console.log(collectionTopArr)
+      "0x59468516a8259058bad1ca5f8f4bff190d30e066",
+      "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
+      "0x90b2baca772f677f0eff93a844fa70d19fbbd46a",
+    ];
+    const collectionTopArr = [
+      ...collectionTop,
+      ...collectionTop,
+      ...collectionTop,
+    ]; // To collect data of 5 NFTs
+    console.log(collectionTopArr);
     const responseAllNFT = await Promise.all(
       collectionTopArr.map(async (ele, index) => {
         const id = parseInt(index / 4) + 2;
-        try{
-          const res = await axios.get('https://deep-index.moralis.io/api/v2/nft/' + ele + '/' + id + '?chain=eth',
-            { 'headers': { "X-API-Key": 'ElMD1BX3aHki68CAPToKw00tx6W6JdEDru1JAH0NMl2KXGPsEylGW1DetmpGpnip' } });
-            console.log(ele);
+        try {
+          const res = await axios.get(
+            "https://deep-index.moralis.io/api/v2/nft/" +
+              ele +
+              "/" +
+              id +
+              "?chain=eth",
+            {
+              headers: {
+                "X-API-Key":
+                  "ElMD1BX3aHki68CAPToKw00tx6W6JdEDru1JAH0NMl2KXGPsEylGW1DetmpGpnip",
+              },
+            }
+          );
+          console.log(ele);
           return res.data;
-        }
-        catch(err){
+        } catch (err) {
           console.log(err);
         }
       })
@@ -129,19 +172,31 @@ const Landingpage = (props) => {
     // console.log(responseAllNFT[0].token_address);
 
     // const response = await axios.get();
+  };
 
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   if (loadingState !== "loaded") {
     return (
       <div
-        style={{ minHeight: "100vh", alignContent: "center", marginBottom:"100px", justifyContent: 'center' }}
+        style={{
+          minHeight: "100vh",
+          alignContent: "center",
+          marginBottom: "100px",
+          justifyContent: "center",
+        }}
       >
-        <div style={{minHeight: '100vh', display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
+        <div
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Spin size="large" />
         </div>
       </div>
@@ -166,8 +221,23 @@ const Landingpage = (props) => {
         }}
       >
         <ImageContainer>
-          <div style={{paddingTop:'8vh', height: '100%', display:'flex',flexDirection: 'column', justifyContent:'center'}}>
-            <div style={{ color: " #D14F8C", fontSize: ".9rem", fontWeight: 'bold' }}>
+          <div
+            style={{
+              paddingTop: "8vh",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              marginTop: "0rem",
+            }}
+          >
+            <div
+              style={{
+                color: " #D14F8C",
+                fontSize: ".9rem",
+                fontWeight: "bold",
+              }}
+            >
               Warranty System now get easy with Import win
             </div>
             <div style={{ fontSize: "3.7rem", lineHeight: "4.5rem" }}>
@@ -179,19 +249,26 @@ const Landingpage = (props) => {
               Explore the NFT marketplace dedicated to creators
             </div> */}
             <div style={{ display: "flex", marginTop: "2rem" }}>
-
-              <a href="/allnft" style={{ textDecoration: "none", color: "white" }}><Transparentbtn >Explore Product</Transparentbtn></a>
-              <a href="/add-product" style={{ textDecoration: "none", color: "white" }}><Transparentbtn style={{ marginLeft: "2rem" }}>
-                Create Product
-              </Transparentbtn></a>
-
+              <a
+                href="/allnft"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Transparentbtn>Explore Product</Transparentbtn>
+              </a>
+              <a
+                href="/add-product"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Transparentbtn style={{ marginLeft: "2rem" }}>
+                  Create Product
+                </Transparentbtn>
+              </a>
             </div>
           </div>
         </ImageContainer>
       </div>
 
       {/* Trending Carousel */}
-
 
       {/* Top Collections */}
       {/* <div
@@ -251,11 +328,9 @@ const Landingpage = (props) => {
             flexWrap: "wrap",
             marginTop: "2rem",
             width: "108%",
-            marginLeft: "0.2rem"
-
+            marginLeft: "0.2rem",
           }}
         >
-
           <div
             style={{
               display: "flex",
@@ -264,14 +339,33 @@ const Landingpage = (props) => {
               flexDirection: "column",
             }}
           >
-            <div style={{ display: "flex", width: "100%", alignItems: "start", justifyContent: "flex-start", flexWrap: "wrap" }}>
-              {data.map(ele =>
-                <Link to={`/asset/${ele.token_address}/${ele.token_id}`} style={{textDecoration:"none",color:"white"}}>
-                  <Landingcard
-                    image={JSON.parse(ele.metadata)}
-                    owner={ele.owner}
-                    name={ele.name}
-                    symbol={ele.symbol + ' #' + ele.token_id} /></Link>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                alignItems: "start",
+                justifyContent: "flex-start",
+                flexWrap: "wrap",
+              }}
+            >
+              {productdata.map(
+                (ele) => (
+                  // console.log(ele),
+                  (
+                    <Link
+                      to={`/asset/${ele.data.sellerAddress}/${ele.id}`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      <Landingcard
+                        image={ele.data.url}
+                        owner={ele.data.sellerAddress}
+                        name={ele.data.title}
+                        price={ele.data.price}
+                        Quantity={ele.data.Quantity}
+                      />
+                    </Link>
+                  )
+                )
               )}
             </div>
           </div>
@@ -296,7 +390,6 @@ const Landingpage = (props) => {
           }}
         >
           {/* <HeadingText>Top Sellers</HeadingText> */}
-
         </div>
         {/* <div
           style={{
@@ -440,53 +533,103 @@ const Landingpage = (props) => {
           paddingLeft: "8rem",
           paddingRight: "8rem",
           paddingTop: "9rem",
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"center",
-          flexDirection:"column",
-          marginBottom:"5rem"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          marginBottom: "5rem",
         }}
       >
-        <img style={{width:"35rem"}} src={Createsell} alt="heading"/>
+        <img style={{ width: "35rem" }} src={Createsell} alt="heading" />
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             flexWrap: "wrap",
-            marginTop:"7rem"
+            marginTop: "7rem",
           }}
         >
-          <div style={{ width: "47%", display: "flex",flexWrap:"wrap" }}>
-            <img src={Card1} style={{height:"6rem",width:"6rem"}} alt="C1"/>
-            <div style={{marginLeft:"3rem",width:"70%"}}>
+          <div style={{ width: "47%", display: "flex", flexWrap: "wrap" }}>
+            <img
+              src={Card1}
+              style={{ height: "6rem", width: "6rem" }}
+              alt="C1"
+            />
+            <div style={{ marginLeft: "3rem", width: "70%" }}>
               <Createsmallh>Set up your Wallet</Createsmallh>
-              <Createmaint>Connect wallet by clicking the wallet icon in the top right corner. Learn about the wallets we support.</Createmaint>
+              <Createmaint>
+                Connect wallet by clicking the wallet icon in the top right
+                corner. Learn about the wallets we support.
+              </Createmaint>
             </div>
           </div>
-          <div style={{ width: "47%", display: "flex",flexWrap:"wrap" }}>
-            <img src={Card2} style={{height:"6rem",width:"6rem"}} alt="C1"/>
-            <div style={{marginLeft:"3rem",width:"70%"}}>
+          <div style={{ width: "47%", display: "flex", flexWrap: "wrap" }}>
+            <img
+              src={Card2}
+              style={{ height: "6rem", width: "6rem" }}
+              alt="C1"
+            />
+            <div style={{ marginLeft: "3rem", width: "70%" }}>
               <Createsmallh>Create Your Collection</Createsmallh>
-              <Createmaint>Click Create and Add social links, a description, profile & banner images, and set a secondary sales fee.</Createmaint>
+              <Createmaint>
+                Click Create and Add social links, a description, profile &
+                banner images, and set a secondary sales fee.
+              </Createmaint>
             </div>
           </div>
-          <div style={{ width: "47%", display: "flex",marginTop:"5rem",flexWrap:"wrap" }}>
-            <img src={Card3} style={{height:"6rem",width:"6rem"}} alt="C1"/>
-            <div style={{marginLeft:"3rem",width:"70%"}}>
+          <div
+            style={{
+              width: "47%",
+              display: "flex",
+              marginTop: "5rem",
+              flexWrap: "wrap",
+            }}
+          >
+            <img
+              src={Card3}
+              style={{ height: "6rem", width: "6rem" }}
+              alt="C1"
+            />
+            <div style={{ marginLeft: "3rem", width: "70%" }}>
               <Createsmallh>Add Your NFTs</Createsmallh>
-              <Createmaint>Upload your work (image, video, audio, or 3D art), add a title and description, and customize your NFTs</Createmaint>
+              <Createmaint>
+                Upload your work (image, video, audio, or 3D art), add a title
+                and description, and customize your NFTs
+              </Createmaint>
             </div>
           </div>
-          <div style={{ width: "47%", display: "flex",marginTop:"5rem",flexWrap:"wrap" }}>
-            <img src={Card1} style={{height:"6rem",width:"6rem"}} alt="C1"/>
-            <div style={{marginLeft:"3rem",width:"70%"}}>
+          <div
+            style={{
+              width: "47%",
+              display: "flex",
+              marginTop: "5rem",
+              flexWrap: "wrap",
+            }}
+          >
+            <img
+              src={Card1}
+              style={{ height: "6rem", width: "6rem" }}
+              alt="C1"
+            />
+            <div style={{ marginLeft: "3rem", width: "70%" }}>
               <Createsmallh>List Them For Sale</Createsmallh>
-              <Createmaint>Choose between auctions, fixed-price listings, and declining-price listings. You choose how you want to sell your NFTs</Createmaint>
+              <Createmaint>
+                Choose between auctions, fixed-price listings, and
+                declining-price listings. You choose how you want to sell your
+                NFTs
+              </Createmaint>
             </div>
           </div>
         </div>
-        <Link to='/assets/create' style={{textDecoration:"none",color:"white"}}><Transparentbtn style={{marginTop:"3rem"}}>Create NFT</Transparentbtn></Link>
+        <Link
+          to="/assets/create"
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          <Transparentbtn style={{ marginTop: "3rem" }}>
+            Create NFT
+          </Transparentbtn>
+        </Link>
       </div>
     </div>
   );

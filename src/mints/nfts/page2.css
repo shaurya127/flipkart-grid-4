@@ -94,13 +94,14 @@ textarea {
 }
 
 .digitalbutton {
+  cursor: pointer;
   width: 221px;
   height: 47px;
   border: 2px solid;
   border-image-slice: 1;
   border-width: 2px;
-  background-color: black;
-  color: #f1f1f1;
+  background-color: white;
+  color: black;
   border-radius: 30px;
   font-style: normal;
   font-weight: bold;
