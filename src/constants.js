@@ -3,7 +3,7 @@ import Mintnft from "./components/MintNft";
 import Landingpage from './components/Landingpage'
 import ItemDescription from "./pages/ItemDescription/index"
 import AddProduct from "./components/AddProduct";
-
+import MintNft from "../src/components/MintNft";
 
 const routes = [
   {
