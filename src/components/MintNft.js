@@ -28,9 +28,9 @@ import {
   mintNFT,
 } from "../util/interact.js";
 
-const key = "ec6f69bc02610d613714";
+const key = "8afd7e928a20fcb2f70b";
 const secret =
-  "c6f2719084f7a80818a450c7bb8850fa418f8e56f6c2732b34c930cdc05e1fdf";
+  "cab8f89d1cd01308867d13bbea01b2742f03969b3bf1c8e0e3d0d9223d1d1d67";
 
 const Formlabel = styled.label`
   left: 16.51%;
