@@ -281,7 +281,10 @@ function Mintnft() {
     );
     setStatus(status);
     if (success) {
+      // navigate to home page
+       window.location.href = "/";
       alert("NFT minted");
+
     }
   };
 
