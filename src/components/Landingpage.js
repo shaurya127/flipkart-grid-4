@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Seller from "./Seller";
+
 import axios from "axios";
 import Fundingimg from "../assets/images/FUNDING.png";
 import Landingcard from "./Newcard";

@@ -7,7 +7,7 @@ import Logo from "../assets/images/help-logo.png";
 import { Link } from "react-router-dom";
 import ComingSoon from "../assets/images/comingsoon1.png";
 import Right from '../assets/images/Vectoright.png'
-import MobileFooter from "./FooterMobile";
+
 
 const Divtext = styled.div`
   font-family: "Montserrat";

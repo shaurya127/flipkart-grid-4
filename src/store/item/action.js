@@ -5,7 +5,7 @@ import {
   FETCH_NFT_PRICE_INITIAL, FETCH_NFT_PRICE_SUCCESS, FETCH_NFT_PRICE_FAILURE,
 }
   from './constant';
-import { _getBids, _createBid } from '../../api/nft.api.js';
+
 
 
 
@@ -68,52 +68,4 @@ export const getNftById = (payload) => {
 }
 
 
-//
-// export const fetchNftPrice = (payload) => {
-//   return async (dispatch) => {
-//     try {
-//       dispatch({
-//         type: FETCH_NFT_PRICE_INITIAL,
-//       })
-//     } catch (e) {
-//
-//     }
-//   }
-// }
 
-export const fetchOngoingBids = (payload) => {
-  return async (dispatch) => {
-    try {
-      const { tokenId } = payload || null;
-      console.log(tokenId, 'this is the token id');
-      dispatch({
-        type: FETCH_BID_INITIAL,
-      });
-      const data = await _getBids({ tokenId: 'trialToken' });
-      console.log('on going bids fetched', data);
-      dispatch({
-        type: FETCH_BID_SUCCESS,
-        payload: data,
-      });
-    } catch (e) {
-      dispatch({
-        type: FETCH_BID_FAILURE,
-        payload: e,
-      });
-    }
-  }
-}
-
-export const placeBid = (payload) => {
-  return async (dispatch) => {
-    try {
-      dispatch({
-        type: PLACE_BID_INITIAL,
-      })
-    } catch (e) {
-      dispatch({
-        type: PLACE_BID_FAILURE,
-      })
-    }
-  }
-}

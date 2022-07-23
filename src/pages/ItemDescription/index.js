@@ -8,8 +8,6 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { fetchItemMetaData, getNftById } from "../../store/item/action";
 import { nftmarketaddress, nftaddress } from "../../config";
-import Market from "../../ethereum/Marketplace.json";
-import NFT from "../../ethereum/NFT.json";
 import "font-awesome/css/font-awesome.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import Zoom from "react-medium-image-zoom";
@@ -230,33 +228,33 @@ const ItemDescription = () => {
     // }));
   }, []);
 
-  async function buyNft(nft) {
-    try {
-      const web3Modal = new Web3Modal();
-      const connection = await web3Modal.connect();
-      const provider = new ethers.providers.Web3Provider(connection);
-      const signer = provider.getSigner();
-      window.wallet = signer;
-      window.provider = provider;
-      const contract = new ethers.Contract(
-        nftmarketaddress,
-        Market.abi,
-        signer
-      );
-      // console.log(nft);
-      // const price = ethers.utils.parseUnits(nft.price, "ether");
-      // console.log(nftaddress);
-      // console.log(nft.itemId);
-      await sendTransaction(
-        contract,
-        "buyNFT",
-        [collection],
-        "You have Purchse Token Successfully"
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  // async function buyNft(nft) {
+  //   try {
+  //     const web3Modal = new Web3Modal();
+  //     const connection = await web3Modal.connect();
+  //     const provider = new ethers.providers.Web3Provider(connection);
+  //     const signer = provider.getSigner();
+  //     window.wallet = signer;
+  //     window.provider = provider;
+  //     const contract = new ethers.Contract(
+  //       nftmarketaddress,
+  //       Market.abi,
+  //       signer
+  //     );
+  //     // console.log(nft);
+  //     // const price = ethers.utils.parseUnits(nft.price, "ether");
+  //     // console.log(nftaddress);
+  //     // console.log(nft.itemId);
+  //     await sendTransaction(
+  //       contract,
+  //       "buyNFT",
+  //       [collection],
+  //       "You have Purchse Token Successfully"
+  //     );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
   if (loadingState !== "loaded") {
     return (

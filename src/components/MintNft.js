@@ -8,8 +8,6 @@ import { create, CID, IPFSHTTPClient } from "ipfs-http-client";
 import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress, polygonweth } from "../config";
 import "../assets/css/home.css";
-import NFT from "../ethereum/NFT.json";
-import Market from "../ethereum/Marketplace.json";
 import styled from "styled-components";
 import { Player } from "video-react";
 import { storage } from "../firebase.js";
