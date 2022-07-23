@@ -12,13 +12,14 @@ import NFT from "../ethereum/NFT.json";
 import Market from "../ethereum/Marketplace.json";
 import styled from "styled-components";
 import { Player } from "video-react";
+import { storage } from "../firebase.js";
 import "../../node_modules/video-react/dist/video-react.css"; // import css
 import PageHeader from "../components/PageHeader";
 import Createsell from "../assets/images/createsell.png";
 import Card1 from "../assets/images/card.png";
 import Card2 from "../assets/images/card1.png";
 import Card3 from "../assets/images/card2.png";
-
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Link } from "react-router-dom";
 import { pinJSONToIPFS, pinFileToIPFS } from "../util/pinata";
 
@@ -199,6 +200,13 @@ const Createmaint = styled.div`
   margin-top: 1.2rem;
 `;
 
+const Uploadfile = async (file) => {
+  const storageRef = ref(storage, `nft/images`);
+  const uploadeRef = await uploadBytes(storageRef, file);
+  const downLoadUrl = await getDownloadURL(uploadeRef.ref);
+  return downLoadUrl;
+};
+
 const projectId = "2CFlxQSp0nl3q8LdfwnFiAfAeTp";
 const projectSecret = "8a3c8c48c1b49cd062469969f7b80961";
 const authorization = "Basic " + btoa(projectId + ":" + projectSecret);
@@ -211,6 +219,7 @@ function Mintnft() {
   const [filename, setfilename] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = React.useState([]);
+  const [fileItem, setFile] = useState(null);
   const [prog, setProg] = useState(0);
   const [status, setStatus] = useState("");
   const [formInput, updateFormInput] = useState({
@@ -221,47 +230,47 @@ function Mintnft() {
   });
 
   async function onChange(e) {
-    console.log(e.target.files[0]);
-    if (e.target.files[0]) {
-      const file = e.target.files[0];
-      try {
-        const formData = new FormData();
-        formData.append("file", file);
+    setFile(e.target.files[0]);
+    const url = await Uploadfile(e.target.files[0]);
+    setFileImg(url);
+    console.log(url);
+    // console.log(e.target.files[0]);
+    // if (e.target.files[0]) {
+    //   const file = e.target.files[0];
+    //   try {
+    //     const formData = new FormData();
+    //     formData.append("file", file);
 
-        const resFile = await axios({
-          method: "post",
-          url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
-          data: formData,
-          headers: {
-            pinata_api_key: key,
-            pinata_secret_api_key: secret,
-            "Content-Type": "multipart/form-data",
-          },
-        });
+    //     const resFile = await axios({
+    //       method: "post",
+    //       url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+    //       data: formData,
+    //       headers: {
+    //         pinata_api_key: key,
+    //         pinata_secret_api_key: secret,
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     });
 
-        const ImgHash = `ipfs/${resFile.data.IpfsHash}`;
+    //     const ImgHash = `ipfs/${resFile.data.IpfsHash}`;
 
-        const url = `https://gateway.pinata.cloud/` + ImgHash;
-        setFileImg(url);
-        console.log(url);
-      } catch (error) {
-        console.log("Error sending File to IPFS: ");
-        console.log(error);
-      }
-    }
-    else{
-      alert("Please upload only one image");
-    }
+    //     const url = `https://gateway.pinata.cloud/` + ImgHash;
+    //     setFileImg(url);
+    //     console.log(url);
+    //   } catch (error) {
+    //     console.log("Error sending File to IPFS: ");
+    //     console.log(error);
+    //   }
+    // }
+    // else{
+    //   alert("Please upload only one image");
+    // }
   }
 
-  
   // console.log(fileImg);
-
- 
 
   // console.log(fileUrl);
   const onMintPressed = async () => {
-    
     const { name, description, price, royaltyinweth } = formInput;
     const { success, status } = await mintNFT(
       fileImg,
