@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Line from "../assets/images/Line 54.png";
-// import Totop from '../assets/images/totop.png'
-// import Search from '../assets/images/search.png'
 import Logo from "../assets/images/help-logo.png";
 import { Link } from "react-router-dom";
 import ComingSoon from "../assets/images/comingsoon1.png";
@@ -195,34 +193,7 @@ const MobilePage = () => {
           </SearchBox>
 
 
-          {/*           
-<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css"/>
-<style type="text/css">
-</style>
-<div id="mc_embed_signup">
-<form action="https://createprotocol.us14.list-manage.com/subscribe/post?u=51056ca5a49a991438bd212f6&amp;id=ded84bb1e4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
-    <div id="mc_embed_signup_scroll">
-	<h2>Subscribe</h2>
-<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-<div class="mc-field-group">
-	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-</label>
-	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"/>
-</div>
-	<div id="mce-responses" class="clear foot">
-		<div class="response" id="mce-error-response" style={{display:"none"}}></div>
-		<div class="response" id="mce-success-response" style={{display:"none"}}></div>
-	</div>   
-    <div style={{position:"absolute",left:"-500px"}} aria-hidden="true"><input type="text" name="b_51056ca5a49a991438bd212f6_ded84bb1e4" tabindex="-1" value=""/></div>
-        <div class="optionalParent">
-            <div class="clear foot">
-                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"/>
-                
-            </div>
-        </div>
-    </div>
-</form>
-</div> */}
+ 
 
 
 
@@ -234,28 +205,11 @@ const MobilePage = () => {
 
 
         </div>
-        {/* <div
-          style={{
-            background: "black",
-            height: "120vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "start",
-            marginTop: "20rem",
-            flexDirection: "column",
-          }}
-        ><img
-        src={Line}
-        alt="li"
-        style={{ marginTop: "1rem", marginBottom: "4rem" }}
-      />
-      <img src={Logo} alt="hi" />
-          
-          </div> */}
+       
 
       </div >
 
-      <MobileFooter />
+      
 
 
     </div>
