@@ -139,4 +139,7 @@ const LandingCard = (props) => {
   );
 };
 
+
+
+
 export default LandingCard;

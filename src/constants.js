@@ -3,7 +3,7 @@ import Mintnft from "./components/MintNft";
 import Landingpage from './components/Landingpage'
 import ItemDescription from "./pages/ItemDescription/index"
 import AddProduct from "./components/AddProduct";
-import MintNft from "../src/components/MintNft";
+import UserProfile from "./components/Userprofile";
 
 const routes = [
   {
@@ -11,14 +11,7 @@ const routes = [
     path: "/",
     component: Landingpage,
   },
- 
 
-
-  // {
-  //   pathName: "profile",
-  //   path: "/profile/:addr",
-  //   component: Profile,
-  // },
   
   {
     pathName: "create",
@@ -41,21 +34,13 @@ const routes = [
     component: ItemDescription,
   },
   
-  // {
-  //   pathName: "allnft",
-  //   path: "/allnft",
-  //   component: AllNFT,
-  // },
-  // {
-  //   pathName: "profile",
-  //   path: "/profile",
-  //   component: Userprofile,
-  // },
-  // {
-  //   pathName: "viewProfile",
-  //   path: "/profile/:id",
-  //   component: ViewProfile,
-  // },
+  
+  {
+    pathName: "profile",
+    path: "/profile",
+    component: UserProfile,
+  },
+
   
 
 ];
