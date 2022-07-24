@@ -19,13 +19,10 @@ import Card2 from "../assets/images/card1.png";
 import Card3 from "../assets/images/card2.png";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Link } from "react-router-dom";
-import { pinJSONToIPFS, pinFileToIPFS } from "../util/pinata";
 
 import {
-  connectWallet,
-  getCurrentWalletConnected,
   mintNFT,
-} from "../util/interact.js";
+} from "../contract/interact.js";
 
 const key = "8afd7e928a20fcb2f70b";
 const secret =

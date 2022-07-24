@@ -1,7 +1,8 @@
+import block from "ipfs-http-client/src/block/index.js";
 import { pinJSONToIPFS } from "./pinata.js";
 const alchemyKey = 'https://eth-ropsten.alchemyapi.io/v2/PTvX4BqWwpnxtE5hUYvtOgdDVcAQGBp';
-const contractABI = require("../contract-abi.json");
-const contractAddress = "0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE";
+const contractABI = require("./contract-abi.json");
+const contractAddress = "0x02eFE0B1D64f1FD5A19F0A5F42CcD70580BF1FaA";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 const fs = require('fs');
@@ -99,6 +100,7 @@ export const mintNFT = async (url, name, description,price,royaltyinweth) => {
 
   //make metadata
   const metadata = new Object();
+  metadata.time=new Date().toString();
   metadata.name = name;
   metadata.image = url;
   metadata.description = description;
