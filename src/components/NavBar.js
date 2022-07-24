@@ -167,20 +167,13 @@ const NavBar = (props) => {
             <NavLink to="/">
               <div style={{ width: "10px", marginLeft: "5.5rem" }}>
                 <h1 style={{
-                  fontSize: "1rem",
+                  fontSize: "2rem",
                   fontWeight: "bold",
                   color: "white",
                   marginLeft: "1rem",
                   
-                }}>Import win</h1>
-                {/* <img src={logo1} alt="home" style={{
-                    fontSize: "2rem",
-                    fontWeight: "bold",
-                    color: "white",
-                    width: "18rem",
-                    marginTop: "0.5rem",
-                    marginLeft: "-15px",
-                  }} /> */}
+                }}>ImportWin</h1>
+                
                   
                 
                  
@@ -203,22 +196,22 @@ const NavBar = (props) => {
               }}
             >
               
-              <NavLink to="/about">
+              <NavLink to="/">
                 <div className="dropdown">
-                  <button className="dropbtn">Product</button>
+                  <button className="dropbtn">Profile</button>
                 </div>
               </NavLink>
               <NavLink to="/add-product" style={{ color: "#FFF" }}>
                 <div style={{ textDecoration: "none" }}>Add Product</div>
               </NavLink>
 
-              <NavLink to="/signup">
+              <NavLink to="/">
                 <div className="dropdown">
                   <button className="dropbtn">Signup</button>
                 </div>
               </NavLink>
 
-              <NavLink to="/signup">
+              <NavLink to="/">
                 <div className="dropdown">
                   <button className="dropbtn">Login</button>
                 </div>
@@ -292,24 +285,39 @@ const NavBar = (props) => {
                       border: "none",
                     }}
                   >
-                    <button
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "0.9rem",
-                        width: "10rem",
-                        borderRadius: "10px",
-                        border: "none",
-                        fontFamily: "Montserrat, sans-serif",
-                      }}
-                      className="border-gradient"
-                      onClick={() => {
-                        dispatch(addMetamask());
-                      }}
-                    >
-                      Connect Wallet
-                    </button>
+{
+  window.ethereum?<button
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "0.9rem",
+    width: "10rem",
+    borderRadius: "10px",
+    border: "none",
+    fontFamily: "Montserrat, sans-serif",
+  }}
+  className="border-gradient"
+  onClick={() => {
+    dispatch(addMetamask());
+  }}
+>
+  Connect Wallet
+</button>: <a href="https://metamask.io/download/"><button
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "0.9rem",
+    width: "10rem",
+    borderRadius: "10px",
+    border: "none",
+    fontFamily: "Montserrat, sans-serif",
+  }}
+  className="border-gradient" >Install MetaMask</button></a>
+}
+
+                    
                   </div>
                 )}
               </div>

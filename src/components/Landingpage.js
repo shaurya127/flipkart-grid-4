@@ -245,12 +245,10 @@ const Landingpage = (props) => {
               <br /> System using <br />
               NFTs{" "}
             </div>
-            {/* <div style={{ fontSize: "1.2rem" }}>
-              Explore the NFT marketplace dedicated to creators
-            </div> */}
+           
             <div style={{ display: "flex", marginTop: "2rem" }}>
               <a
-                href="/allnft"
+                href="/"
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <Transparentbtn>Explore Product</Transparentbtn>
@@ -540,7 +538,7 @@ const Landingpage = (props) => {
           marginBottom: "5rem",
         }}
       >
-        <img style={{ width: "35rem" }} src={Createsell} alt="heading" />
+       <h1 style={{color:"white"}}>Create and sell your products</h1>
         <div
           style={{
             display: "flex",
@@ -551,11 +549,7 @@ const Landingpage = (props) => {
           }}
         >
           <div style={{ width: "47%", display: "flex", flexWrap: "wrap" }}>
-            <img
-              src={Card1}
-              style={{ height: "6rem", width: "6rem" }}
-              alt="C1"
-            />
+            
             <div style={{ marginLeft: "3rem", width: "70%" }}>
               <Createsmallh>Set up your Wallet</Createsmallh>
               <Createmaint>
@@ -592,10 +586,10 @@ const Landingpage = (props) => {
               alt="C1"
             />
             <div style={{ marginLeft: "3rem", width: "70%" }}>
-              <Createsmallh>Add Your NFTs</Createsmallh>
+              <Createsmallh>Add Your Products</Createsmallh>
               <Createmaint>
                 Upload your work (image, video, audio, or 3D art), add a title
-                and description, and customize your NFTs
+                and description, and customize your Products
               </Createmaint>
             </div>
           </div>
@@ -617,7 +611,7 @@ const Landingpage = (props) => {
               <Createmaint>
                 Choose between auctions, fixed-price listings, and
                 declining-price listings. You choose how you want to sell your
-                NFTs
+                Products
               </Createmaint>
             </div>
           </div>
@@ -627,7 +621,7 @@ const Landingpage = (props) => {
           style={{ textDecoration: "none", color: "white" }}
         >
           <Transparentbtn style={{ marginTop: "3rem" }}>
-            Create NFT
+            Create Products
           </Transparentbtn>
         </Link>
       </div>

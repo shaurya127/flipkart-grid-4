@@ -19,6 +19,7 @@ export default function ConnectWallet() {
         dispatch(addMetamask());
       })
     }
+    
   }, []);
 
   return (

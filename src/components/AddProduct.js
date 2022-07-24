@@ -374,7 +374,7 @@ const AddProduct = () => {
           </div>
         </div>
         <Link
-          to="/assets/create"
+          to="/add-product"
           style={{ textDecoration: "none", color: "white" }}
         >
           <Transparentbtn style={{ marginTop: "3rem" }}>
