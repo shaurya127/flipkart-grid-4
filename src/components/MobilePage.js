@@ -177,7 +177,7 @@ const MobilePage = () => {
             flexDirection: "column",
           }}
         >
-          <img src={Logo} alt="hi" />
+         <h1 style={{color:"white"}}>Import Win</h1>
           <img src={ComingSoon} alt="hi" />
           <Divtext>Mobile version to be launched soon.</Divtext>
           <img
