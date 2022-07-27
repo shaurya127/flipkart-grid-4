@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Drawer } from "antd";
 import { Link } from "react-router-dom";
-import { isBrowser } from "react-device-detect";
+
 import "../assets/css/Navbar.css";
 import "../assets/css/dropdownnav.css";
 import Drawerroutes from "./DrawerRoutes";
-import Home from "../assets/images/image 8.svg";
 import styled from "styled-components";
-// import WalletConnectProvider from "@walletconnect/web3-provider";
-import Navdropline from "../assets/images/navdropline.png";
 import ConnectWallet from "./ConnectWallet";
 import { useDispatch, useSelector } from "react-redux";
 import { addMetamask, addWalletConnect } from "../store";
 import { toggleWalletPopup } from "../store";
 import { Menu, Button, Dropdown } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import web3 from "web3";
-import "antd/dist/antd.css";
-// import logo1 from "../assets/product-images/logo1.png";
-// import logo2 from "../assets/product-images/logo2.png";
 
+import "antd/dist/antd.css";
 const SubMenu = Menu;
 export const GradientButton = styled.div`
   color: white;
@@ -196,7 +190,7 @@ const NavBar = (props) => {
               }}
             >
               
-              <NavLink to="/">
+              <NavLink to="/profile">
                 <div className="dropdown">
                   <button className="dropbtn">Profile</button>
                 </div>
@@ -205,13 +199,13 @@ const NavBar = (props) => {
                 <div style={{ textDecoration: "none" }}>Add Product</div>
               </NavLink>
 
-              <NavLink to="/">
+              <NavLink to="/register">
                 <div className="dropdown">
                   <button className="dropbtn">Signup</button>
                 </div>
               </NavLink>
 
-              <NavLink to="/">
+              <NavLink to="/login">
                 <div className="dropdown">
                   <button className="dropbtn">Login</button>
                 </div>

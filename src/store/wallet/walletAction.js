@@ -44,20 +44,7 @@ export const addMetamask = () => {
                 console.log(switchError)
                 // This error code indicates that the chain has not been added to MetaMask.
                 if (switchError.code === 4902) {
-                  // try {
-                  //   await window.ethereum.request({
-                  //     method: 'wallet_addEthereumChain',
-                  //     params: [
-                  //       {
-                  //         chainId: '0xf00',
-                  //         chainName: '...',
-                  //         rpcUrls: ['https://...'] /* ... */,
-                  //       },
-                  //     ],
-                  //   });
-                  // } catch (addError) {
-                  //   // handle "add" error
-                  // }
+                 
                 }else{
                   dispatch({
                     type : ERROR,
@@ -113,59 +100,3 @@ export const addWalletConnect = () => {
       }
   }     
 }
-
-
-
-//Add order
-// export const addOrder = (
-//   token,
-//   orderItems,
-//   name,
-//   totalAmount,
-//   paymentMethod,
-//   fullAddress,
-//   phone
-// ) => {
-//   return async (dispatch, getState) => {
-//     dispatch({
-//       type: ORDER_LOADING,
-//     });
-//     const user = getState().auth.user;
-//     try {
-//       const response = await timeoutPromise(
-//         fetch(`${API_URL}/order/post`, {
-//           headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//             "auth-token": user.token,
-//           },
-//           method: "POST",
-//           body: JSON.stringify({
-//             token,
-//             orderInfo: {
-//               userId: user.userid,
-//               items: orderItems,
-//               name,
-//               totalAmount,
-//               paymentMethod,
-//               address: fullAddress,
-//               phone,
-//             },
-//           }),
-//         })
-//       );
-//       if (!response.ok) {
-//         dispatch({
-//           type: ORDER_FAILURE,
-//         });
-//         throw new Error("Something went wrong!");
-//       }
-//       const resData = await response.json();
-//       dispatch({
-//         type: ADD_ORDER,
-//         orderItem: resData.content,
-//       });
-//     } catch (err) {
-//       throw error;
-//     }
-//   };

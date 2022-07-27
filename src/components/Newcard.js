@@ -104,7 +104,7 @@ const LandingCard = (props) => {
         /> */}
         <div style={{ width: "80%", textAlign: "left", marginLeft: "1rem" }}>
           <div style={{ fontSize: "1rem", fontWeight: "bold" }}>{props.name || <Skeleton />}</div>
-          <div className="text-truncate" style={{ color: "#A9A9A9", fontSize: "0.7rem" }}>
+          <div className="text-truncate" style={{ color: "white", fontSize: "0.7rem" }}>
             Seller:  {props.owner}
           </div>
         </div>
@@ -126,7 +126,7 @@ const LandingCard = (props) => {
         >
           <div style={{ display: "flex" }}>
            
-            <div style={{ marginLeft: "0.4rem" }}>Quantity: {props.Quantity}</div>
+            <div style={{ marginLeft: "0.4rem" }}>Warranty In days: {props.Warranty}</div>
           </div>
           <div style={{ display: "flex" }}>
             <div style={{ marginRight: "0.4rem" }}>Price: {props.price}</div>

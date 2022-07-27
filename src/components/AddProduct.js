@@ -183,6 +183,7 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [Quantity, setQuantity] = useState("");
+  const [Warranty, setWarranty] = useState("");
   const [sellerAddress, setSellerAddress] = useState("");
   const [image, setImage] = useState(null);
 
@@ -226,7 +227,7 @@ const AddProduct = () => {
       alert("Please fill all the fields");
     }
     e.preventDefault();
-    console.log(title, description, price, Quantity, sellerAddress);
+    console.log(title, description, price, Quantity,Warranty, sellerAddress);
     console.log(image);
     const uploadTask = storage.ref(`product-images/${image.name}`).put(image);
     uploadTask.on(
@@ -249,6 +250,7 @@ const AddProduct = () => {
                 description,
                 price: Number(price),
                 Quantity: Number(Quantity),
+                Warranty: Number(Warranty),
                 sellerAddress,
                 url,
               })
@@ -258,6 +260,7 @@ const AddProduct = () => {
                 setDescription("");
                 setPrice("");
                 setQuantity("");
+                setWarranty("");
                 setSellerAddress("");
                 document.getElementById("file").value = "";
                 setImageError("");
@@ -425,6 +428,18 @@ const AddProduct = () => {
             value={description}
             style={{ width: "100%" }}
           ></Formfilltxt2>
+
+
+      <Formlabel className="formlable">Warranty in Days </Formlabel>
+          <Formfilltxtdocs
+            className="formtxtfill docs"
+            type="text"
+            onChange={(e) => setWarranty(e.target.value)}
+            value={Warranty}
+            style={{ width: "100%" }}
+            required
+          />
+
           <Formlabel className="formlable">Price </Formlabel>
           <Formfilltxtdocs
             className="formtxtfill docs"

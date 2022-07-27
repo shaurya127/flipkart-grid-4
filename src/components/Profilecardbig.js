@@ -89,23 +89,15 @@ const NFTCard = (props) => {
             padding: "1rem 1rem",
           }}
         >
-          {/* <Btn>Place bid</Btn>
-          <Btn>
-            <img src={Heart} alt="like" />
-            <div>365</div>
-          </Btn> */}
+        
         </div>
       </Imagecont>
       <div style={{ marginTop: "3vh", display: "flex", alignItems: "center",height:"8vh" }}>
-        {/* <img
-          style={{ objectFit: "contain", width: "2.2rem" }}
-          src={Landingowner}
-          alt="landingimg"
-        /> */}
+        
         <div style={{ width: "80%", textAlign: "left", marginLeft: "1rem" }}>
-          <div style={{ fontSize: "1rem", fontWeight: "bold" }}>{props.name || <Skeleton />}</div>
-          <div className="text-truncate" style={{ color: "#A9A9A9", fontSize: "0.7rem" }}>
-            Seller:  {props.owner}
+          <div style={{ fontSize: "1rem", fontWeight: "bold",color:"white" }}>{props.name }</div>
+          <div className="text-truncate" style={{ color: "white", fontSize: "0.7rem", }}>
+            Warranty:  {props.Warranty}
           </div>
         </div>
       </div>
@@ -126,10 +118,10 @@ const NFTCard = (props) => {
         >
           <div style={{ display: "flex" }}>
            
-            <div style={{ marginLeft: "0.4rem" }}>Quantity: {props.Quantity}</div>
+            <div style={{ marginLeft: "0.4rem" ,color:"white"}}>Quantity: {props.Quantity}</div>
           </div>
           <div style={{ display: "flex" }}>
-            <div style={{ marginRight: "0.4rem" }}>Price: {props.price}</div>
+            <div style={{ marginRight: "0.4rem",color:"white"  }}>Price: {props.price}</div>
             
           </div>
           

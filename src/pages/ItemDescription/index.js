@@ -4,10 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "antd";
-import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { fetchItemMetaData, getNftById } from "../../store/item/action";
-import { nftmarketaddress, nftaddress } from "../../config";
 import "font-awesome/css/font-awesome.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import Zoom from "react-medium-image-zoom";
@@ -17,10 +15,9 @@ import "../../../node_modules/video-react/dist/video-react.css"; // import css
 import Landingowner from "../../assets/images/landingowner.png";
 import Eth from "../../assets/images/Ethereum (ETH).png";
 import { Spin, Avatar } from "antd";
-import { fetchOngoingBids } from "../../store/item";
-import { sendTransaction } from "../../components/sendTransaction";
 import { fs } from "../../firebase";
-
+import { mintNFT } from "../../contract/interact";
+import Web3 from "web3";
 const Splitscreen = styled.div`
   display: flex;
   flex-direction: row;
@@ -169,11 +166,12 @@ const ItemDescription = () => {
 
   const [Properties, setProperties] = useState([]);
   const { collection, id } = useParams();
-  console.log(id);
-
+  // console.log(id);
+  const [status, setStatus] = useState(false);
   const [data, setData] = useState([]);
   const [productdata, setProductdata] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
+  const [Isminted, setIsminted] = useState(false);
 
   // fetch data from firebase Products collection
 
@@ -187,31 +185,12 @@ const ItemDescription = () => {
       console.log("No matching documents.");
       return;
     }
-
-    // snapshot.forEach((doc) => {
-    //   setProductdata(doc.data());
-    //   // console.log(doc.id, "=>", doc.data());
-
-    //   // setProductdata((productdata) => [...productdata, devdata]);
-    //   setLoadingState("loaded");
-    // });
   };
   useEffect(() => {
     fetchProductData();
   }, []);
 
   console.log(productdata);
-  // console.log(productdata[0].title);
-  // console.log(productdata[0].price);
-  // console.log(productdata[0].url);
-  // console.log(productdata[0].description);
-  // console.log(productdata[0].Quantity);
-  // console.log(productdata[0].sellerAddress);
-
-  //itemid = itemid.toNumber();
-  // var token_address = ethers.BigNumber.from(item1);
-  // var itemId = ethers.BigNumber.from(item2);
-  // console.log(collection,id);
 
   useEffect(() => {
     dispatch(
@@ -228,33 +207,42 @@ const ItemDescription = () => {
     // }));
   }, []);
 
-  // async function buyNft(nft) {
-  //   try {
-  //     const web3Modal = new Web3Modal();
-  //     const connection = await web3Modal.connect();
-  //     const provider = new ethers.providers.Web3Provider(connection);
-  //     const signer = provider.getSigner();
-  //     window.wallet = signer;
-  //     window.provider = provider;
-  //     const contract = new ethers.Contract(
-  //       nftmarketaddress,
-  //       Market.abi,
-  //       signer
-  //     );
-  //     // console.log(nft);
-  //     // const price = ethers.utils.parseUnits(nft.price, "ether");
-  //     // console.log(nftaddress);
-  //     // console.log(nft.itemId);
-  //     await sendTransaction(
-  //       contract,
-  //       "buyNFT",
-  //       [collection],
-  //       "You have Purchse Token Successfully"
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
+  const fileImg = productdata.url;
+  const name = productdata.title;
+  const price = productdata.price;
+  const sellerAddress = productdata.sellerAddress;
+  const description = productdata.description;
+  const Quantity = productdata.Quantity;
+  const Warranty = productdata.Warranty;
+
+  const onMintPressed = async () => {
+    console.log(fileImg, name, price, sellerAddress, description, Quantity);
+    const { success, status } = await mintNFT(
+      fileImg,
+      name,
+      description,
+      price,
+      Quantity,
+      Warranty,
+      sellerAddress
+    );
+    setStatus(status);
+    if (success) {
+      // navigate to home page
+      alert("NFT minted");
+      setIsminted(true);
+      
+    }
+  };
+
+  // Web3.ethe(0x49D588Db7d34c5E119262E9c5C4c3cCd2eE6F951, (err, bal) => {
+  //   if (err) {
+  //     // Do something with the error
+  //     return console.error(err);
   //   }
-  // }
+  
+  //   console.log(bal.toString());
+  // })
 
   if (loadingState !== "loaded") {
     return (
@@ -338,7 +326,7 @@ const ItemDescription = () => {
                 </Link>
               </div>
               <div style={{ color: "white" }}>
-                <Leftheading>Contract Address</Leftheading>
+                <Leftheading>Seller Address</Leftheading>
                 <br />
                 <div
                   style={{
@@ -370,9 +358,13 @@ const ItemDescription = () => {
             >
               {/* {metaData && <Mainheading>{metaData.title}</Mainheading>} */}
               <br />
-              <Mainheading className="text-muted">Description</Mainheading>
+              <Mainheading >Description</Mainheading>
               {productdata && <Desctext>{productdata.description}</Desctext>}
-              {/* {obj.name} */}
+
+              <br />
+              <Mainheading>Warranty</Mainheading>
+              {productdata && <Desctext>{productdata.Warranty}</Desctext>}
+              
             </p>
             <div
               style={{
@@ -412,16 +404,34 @@ const ItemDescription = () => {
                       {productdata.price}
                     </div>
                   </div>
-                  <div
+
+
+                  {
+                    !Isminted ?  <div
                     style={{
                       background: "#229CEA",
                       padding: ".7rem",
                       borderRadius: "0.5rem",
                       cursor: "pointer",
                     }}
-                  >
+                  onClick={onMintPressed} >
                     Buy now
-                  </div>
+                  </div>:
+                  <a href="/profile" style={{color:"white"}}>
+                    <div
+                   style={{
+                     background: "#229CEA",
+                     padding: ".7rem",
+                     borderRadius: "0.5rem",
+                     cursor: "pointer",
+                   }}
+                  >
+                  View NFT
+                 </div>
+                  </a>
+                   
+                  }
+                 
                 </div>
               </div>
               <div
@@ -431,8 +441,7 @@ const ItemDescription = () => {
                   textAlign: "left",
                   height: "4rem",
                 }}
-              >
-              </div>
+              ></div>
             </div>
 
             <div

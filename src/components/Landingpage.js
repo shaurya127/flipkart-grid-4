@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Fundingimg from "../assets/images/FUNDING.png";
 import Landingcard from "./Newcard";
-import Trending1 from "../assets/images/trending1.png";
+// import Trending1 from "../assets/images/trending1.png";
 import { Link } from "react-router-dom";
 import Createsell from "../assets/images/createsell.png";
 import Card1 from "../assets/images/card.png";
@@ -121,62 +121,7 @@ const Landingpage = (props) => {
     fetchProductData();
   }, []);
 
-  // console.log(productdata[0]);
-  // console.log(productdata[0].title);
-  // console.log(productdata[0].price);
-  // console.log(productdata[0].url);
-  // console.log(productdata[0].description);
-  // console.log(productdata[0].Quantity);
-  // console.log(productdata[0].sellerAddress);
-
-  const fetchData = async () => {
-    const collectionTop = [
-      "0x59468516a8259058bad1ca5f8f4bff190d30e066",
-      "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
-      "0x90b2baca772f677f0eff93a844fa70d19fbbd46a",
-    ];
-    const collectionTopArr = [
-      ...collectionTop,
-      ...collectionTop,
-      ...collectionTop,
-    ]; // To collect data of 5 NFTs
-    console.log(collectionTopArr);
-    const responseAllNFT = await Promise.all(
-      collectionTopArr.map(async (ele, index) => {
-        const id = parseInt(index / 4) + 2;
-        try {
-          const res = await axios.get(
-            "https://deep-index.moralis.io/api/v2/nft/" +
-              ele +
-              "/" +
-              id +
-              "?chain=eth",
-            {
-              headers: {
-                "X-API-Key":
-                  "ElMD1BX3aHki68CAPToKw00tx6W6JdEDru1JAH0NMl2KXGPsEylGW1DetmpGpnip",
-              },
-            }
-          );
-          console.log(ele);
-          return res.data;
-        } catch (err) {
-          console.log(err);
-        }
-      })
-    );
-    setData(responseAllNFT);
-    setLoadingState("loaded");
-    console.log("response");
-    console.log(responseAllNFT);
-    // console.log(responseAllNFT[0].token_address);
-
-    // const response = await axios.get();
-  };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+    console.log(productdata);
 
   if (loadingState !== "loaded") {
     return (
@@ -323,12 +268,15 @@ const Landingpage = (props) => {
                       to={`/asset/${ele.data.sellerAddress}/${ele.id}`}
                       style={{ textDecoration: "none", color: "white" }}
                     >
+                      
                       <Landingcard
                         image={ele.data.url}
-                        owner={ele.data.sellerAddress}
+                        owner={ele.data.sellerAddress.substring(0, 5) +
+                          "..." +
+                          ele.data.sellerAddress.slice(-4)}
                         name={ele.data.title}
                         price={ele.data.price}
-                        Quantity={ele.data.Quantity}
+                        Warranty={ele.data.Warranty}
                       />
                     </Link>
                   )

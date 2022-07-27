@@ -229,37 +229,7 @@ function Mintnft() {
     const url = await Uploadfile(e.target.files[0]);
     setFileImg(url);
     console.log(url);
-    // console.log(e.target.files[0]);
-    // if (e.target.files[0]) {
-    //   const file = e.target.files[0];
-    //   try {
-    //     const formData = new FormData();
-    //     formData.append("file", file);
-
-    //     const resFile = await axios({
-    //       method: "post",
-    //       url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
-    //       data: formData,
-    //       headers: {
-    //         pinata_api_key: key,
-    //         pinata_secret_api_key: secret,
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     });
-
-    //     const ImgHash = `ipfs/${resFile.data.IpfsHash}`;
-
-    //     const url = `https://gateway.pinata.cloud/` + ImgHash;
-    //     setFileImg(url);
-    //     console.log(url);
-    //   } catch (error) {
-    //     console.log("Error sending File to IPFS: ");
-    //     console.log(error);
-    //   }
-    // }
-    // else{
-    //   alert("Please upload only one image");
-    // }
+    
   }
 
   // console.log(fileImg);

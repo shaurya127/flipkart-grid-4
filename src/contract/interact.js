@@ -1,8 +1,8 @@
 import block from "ipfs-http-client/src/block/index.js";
 import { pinJSONToIPFS } from "./pinata.js";
-const alchemyKey = 'https://eth-ropsten.alchemyapi.io/v2/PTvX4BqWwpnxtE5hUYvtOgdDVcAQGBp';
+const alchemyKey = 'https://eth-rinkeby.alchemyapi.io/v2/PTvX4BqWwpnxtE5hUYvtOgdDVcAQGBp_';
 const contractABI = require("./contract-abi.json");
-const contractAddress = "0x02eFE0B1D64f1FD5A19F0A5F42CcD70580BF1FaA";
+const contractAddress = "0x354FCeF3AEB1a44cf56c7d2aAa81276b44f55423";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 const fs = require('fs');
@@ -88,15 +88,13 @@ async function loadContract() {
   return new web3.eth.Contract(contractABI, contractAddress);
 }
 
-export const mintNFT = async (url, name, description,price,royaltyinweth) => {
-  if(!url || !name || !description) {
+export const mintNFT = async (url, name, description,price,Quantity,Warranty, sellerAddress) => {
+  // console.log(url, name, description,price,Quantity,Warranty, sellerAddress);
+  if(!url || !name || !description || !price || !Quantity || !sellerAddress) {
    alert("Please fill in all fields");
    return;
   }
-  // const readableStreamForFile = fs.createReadStream(file);
-  // console.log(file, name, description);
 
-  // const contract = await loadContract();
 
   //make metadata
   const metadata = new Object();
@@ -105,7 +103,10 @@ export const mintNFT = async (url, name, description,price,royaltyinweth) => {
   metadata.image = url;
   metadata.description = description;
   metadata.price = price;
-  metadata.royaltyinweth = royaltyinweth;
+  metadata.Warranty = Warranty;
+  metadata.Quantity = Quantity;
+  
+  metadata.sellerAddress = sellerAddress;
 
   const pinataResponse = await pinJSONToIPFS(metadata);
 
@@ -136,7 +137,7 @@ export const mintNFT = async (url, name, description,price,royaltyinweth) => {
     return {
       success: true,
       status:
-        "✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/" +
+        "✅ Check out your transaction on Etherscan: https://rinkeby.etherscan.io/tx/" +
         txHash,
     };
   } catch (error) {

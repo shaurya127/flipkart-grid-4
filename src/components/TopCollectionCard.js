@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styled from 'styled-components'
 
-import TopCollection from '../assets/images/topcollections.png'
+// import TopCollection from '../assets/images/topcollections.png'
 
 const Textcomp = styled.div`
 font-style: normal;
@@ -71,7 +71,7 @@ const TopCollectionCard = (props) => {
             <Maindiv style={{ width: "100%", height: "7rem", display: "flex" }}>
 
                 <Flexdis style={{ width: "20%", paddingLeft: "1rem" }}>
-                    <img src={TopCollection} alt="im" />
+                    {/* <img src={TopCollection} alt="im" /> */}
                     <Textcomp>Super liquids</Textcomp>
                 </Flexdis>
                 <Flexdis style={{ width: "40%" }}>

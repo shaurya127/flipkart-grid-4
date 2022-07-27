@@ -4,7 +4,7 @@ import "font-awesome/css/font-awesome.min.css";
 import { useSelector, useDispatch } from "react-redux";
 import NFTcard from "./Profilecardbig";
 import { Spin } from "antd";
-import "../assets/css/filterdropdown.css";
+// import "../assets/css/filterdropdown.css";
 import Tick from "../assets/images/tickimg.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -149,7 +149,8 @@ const Userprofile = () => {
   const [state, dispatchTemp] = useReducer(reducer, initialstate);
   const [ownerresponse, setOwnerresponse] = useState([]);
   const walletData = useSelector((state) => state.wallet.wallet);
-  const nftDataLoading = useSelector((state) => state.profile.nftDataLoading);
+  const [loading, setLoading] = useState(true);
+  const [loadingState, setLoadingState] = useState("not-loaded");
 
   const [error, setError] = useState(null);
 
@@ -157,28 +158,29 @@ const Userprofile = () => {
 
   const getWalletNfts = async () => {
     const apiKey = "PTvX4BqWwpnxtE5hUYvtOgdDVcAQGBp_";
-    const baseURL = `https://eth-rinkeby.alchemyapi.io/v2/PTvX4BqWwpnxtE5hUYvtOgdDVcAQGBp_/getNFTs/`;
+    const baseURL = 'https://eth-rinkeby.alchemyapi.io/nft/v2/demo/getNFTs/?owner=0x49D588Db7d34c5E119262E9c5C4c3cCd2eE6F951'
     // replace with the wallet address you want to query for NFTs
-    const ownerAddr = "0xfae46f94ee7b2acb497cecaff6cff17f621c693d";
-
+    const ownerAddr = "0xBf27EA70F85Ae95dfA9B4360A9DBcBd6A2133250";
+    
     var config = {
-      method: "get",
-      url: `${baseURL}?owner=${ownerAddr}`,
+      method: 'get',
+      url: baseURL,
     };
 
     axios(config)
-      .then((response) => setProfileNFT(response.data.ownedNfts))
-      .catch((error) => console.log(error));
+      .then((response) => setProfileNFT(response.data.ownedNfts)).then(() => setLoadingState("loaded"))
+      .catch((error) => console.log(error.response.data));
   };
 
   useEffect(() => {
     getWalletNfts();
+    setLoading(false);
   }, []);
-
+  
   console.log(profileNFT);
   // console.log(typeof profileNFT);
 
-  if (nftDataLoading) {
+  if (loadingState !== "loaded") {
     return (
       <div
         style={{
@@ -202,6 +204,10 @@ const Userprofile = () => {
       </div>
     );
   }
+
+
+
+
   return (
     <>
       <div style={{ width: "100%", paddingTop: "10rem" }}>
@@ -284,8 +290,10 @@ const Userprofile = () => {
             console.log(ele),
             <NFTcard
               image={ele.metadata.image}
-              
               name={ele.title}
+              Warranty={ele.metadata.Warranty}
+              Quantity={ele.metadata.Quantity}
+              price={ele.metadata.price}
              
             />
           ))}
