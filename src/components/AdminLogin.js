@@ -57,8 +57,6 @@ export default function Login({ setCompanyData }) {
     if (username !== "" && password !== "") {
       try {
         var res = await signIn(username, password);
-        // console.log(res);
-        setCompanyData("");
         if (!res._tokenResponse) window.alert(res);
       } catch (error) {
         console.log(error);
@@ -66,11 +64,10 @@ export default function Login({ setCompanyData }) {
     }
   };
 
-  if (currentUser && currentUser.emailVerified) {
+  if (currentUser ) {
     // return <Navigate to="/user-home" />;
-  } else if (currentUser && !currentUser.emailVerified) {
-    // return <Navigate to="/verify-email" />;
-  } else {
+    window.location.href = "/";
+  }  else {
     return (
       <Grid
         container

@@ -114,8 +114,9 @@ export default function Primary() {
     }
   };
 
-  if (currentUser && !currentUser.emailVerified) {
+  if (currentUser) {
     // return <Navigate to="/verify-email" />;
+    window.location.href = "/";
   } else {
     return (
       <Grid
