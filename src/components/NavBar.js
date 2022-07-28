@@ -12,6 +12,8 @@ import { addMetamask, addWalletConnect } from "../store";
 import { toggleWalletPopup } from "../store";
 import { Menu, Button, Dropdown } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import { useAuth } from "../context/AuthContext";
+import { getAuth, signOut } from "firebase/auth";
 
 import "antd/dist/antd.css";
 const SubMenu = Menu;
@@ -62,15 +64,12 @@ const NavLink = styled(Link)`
 `;
 
 const NavBar = (props) => {
+  const { signUpWithName, currentUser } = useAuth();
   const [showDrawer, setShowDrawer] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-  const name = props.location.pathname.replaceAll("-", " ").replace("/", "");
 
   const dispatch = useDispatch();
-  const handleToggle = () => {
-    dispatch(toggleWalletPopup());
-  };
   const wallet = useSelector((state) => state.wallet.wallet);
 
   useEffect(() => {
@@ -89,6 +88,19 @@ const NavBar = (props) => {
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
+  };
+
+  const Logout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        if(!currentUser){
+          alert("Logged out successfully");
+        }
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   };
 
   // console.log(Web3.eth.getBalance("0x407d73d8a49eeb85d32cf465507dd71d507100c1"))
@@ -129,8 +141,6 @@ const NavBar = (props) => {
               </NavLink>
             </ul>
           </div>
-
-          
         </nav>
       </Navdiv>
       <Navdivdesktop
@@ -160,19 +170,16 @@ const NavBar = (props) => {
           >
             <NavLink to="/">
               <div style={{ width: "10px", marginLeft: "5.5rem" }}>
-                <h1 style={{
-                  fontSize: "2rem",
-                  fontWeight: "bold",
-                  color: "white",
-                  marginLeft: "1rem",
-                  
-                }}>ImportWin</h1>
-                
-                  
-                
-                 
-                
-                
+                <h1
+                  style={{
+                    fontSize: "2rem",
+                    fontWeight: "bold",
+                    color: "white",
+                    marginLeft: "1rem",
+                  }}
+                >
+                  ImportWin
+                </h1>
               </div>
             </NavLink>
 
@@ -189,7 +196,6 @@ const NavBar = (props) => {
                 textDecoration: "none",
               }}
             >
-              
               <NavLink to="/profile">
                 <div className="dropdown">
                   <button className="dropbtn">Profile</button>
@@ -199,7 +205,19 @@ const NavBar = (props) => {
                 <div style={{ textDecoration: "none" }}>Add Product</div>
               </NavLink>
 
-              <NavLink to="/register">
+              {signUpWithName ? (
+                <div className="dropdown" onClick={Logout}>
+                  <button className="dropbtn">Logout</button>
+                </div>
+              ) : (
+                <NavLink to="/login">
+                  <div className="dropdown">
+                    <button className="dropbtn">Login</button>
+                  </div>
+                </NavLink>
+              )}
+
+              {/* <NavLink to="/register">
                 <div className="dropdown">
                   <button className="dropbtn">Signup</button>
                 </div>
@@ -209,7 +227,7 @@ const NavBar = (props) => {
                 <div className="dropdown">
                   <button className="dropbtn">Login</button>
                 </div>
-              </NavLink>
+              </NavLink> */}
 
               <div style={{ marginRight: "6.5rem" }}>
                 {wallet && wallet.address ? (
@@ -279,39 +297,44 @@ const NavBar = (props) => {
                       border: "none",
                     }}
                   >
-{
-  window.ethereum?<button
-  style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "0.9rem",
-    width: "10rem",
-    borderRadius: "10px",
-    border: "none",
-    fontFamily: "Montserrat, sans-serif",
-  }}
-  className="border-gradient"
-  onClick={() => {
-    dispatch(addMetamask());
-  }}
->
-  Connect Wallet
-</button>: <a href="https://metamask.io/download/"><button
-  style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "0.9rem",
-    width: "10rem",
-    borderRadius: "10px",
-    border: "none",
-    fontFamily: "Montserrat, sans-serif",
-  }}
-  className="border-gradient" >Install MetaMask</button></a>
-}
-
-                    
+                    {window.ethereum ? (
+                      <button
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "0.9rem",
+                          width: "10rem",
+                          borderRadius: "10px",
+                          border: "none",
+                          fontFamily: "Montserrat, sans-serif",
+                        }}
+                        className="border-gradient"
+                        onClick={() => {
+                          dispatch(addMetamask());
+                        }}
+                      >
+                        Connect Wallet
+                      </button>
+                    ) : (
+                      <a href="https://metamask.io/download/">
+                        <button
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "0.9rem",
+                            width: "10rem",
+                            borderRadius: "10px",
+                            border: "none",
+                            fontFamily: "Montserrat, sans-serif",
+                          }}
+                          className="border-gradient"
+                        >
+                          Install MetaMask
+                        </button>
+                      </a>
+                    )}
                   </div>
                 )}
               </div>

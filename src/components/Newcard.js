@@ -11,12 +11,7 @@ import axios from "axios";
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 const Landingdiv = styled.div`
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.11) 0%,
-    rgba(0, 0, 0, 0.53125) 48.96%,
-    rgba(55, 55, 55, 0.8) 100%
-  );
+background-image: linear-gradient(to right top, #101824, #004a67, #008487, #00bd6e, #a8eb12); 
 
   opacity: 0.75;
   box-shadow: 0px -10px 25px rgba(0, 0, 0, 0.32);
@@ -34,6 +29,24 @@ const Landingdiv = styled.div`
   @media (max-width: 600px) {
     width: 100%;
   }
+ 
+  &:hover {
+    // transform: scale(1.75);
+    opacity: 1;
+    box-shadow: 0px -10px 25px rgba(0, 0, 0, 0.32);
+    border-radius: 24px;
+    height: 58vh;
+    width: 19vw;
+    padding: 0.8rem;
+    object-fit: cover;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-left:.5rem;
+    margin-right:.5rem;
+  }
+
 `;
 
 const Imagecont = styled.div`
@@ -89,19 +102,11 @@ const LandingCard = (props) => {
             padding: "1rem 1rem",
           }}
         >
-          {/* <Btn>Place bid</Btn>
-          <Btn>
-            <img src={Heart} alt="like" />
-            <div>365</div>
-          </Btn> */}
+          
         </div>
       </Imagecont>
       <div style={{ marginTop: "3vh", display: "flex", alignItems: "center",height:"8vh" }}>
-        {/* <img
-          style={{ objectFit: "contain", width: "2.2rem" }}
-          src={Landingowner}
-          alt="landingimg"
-        /> */}
+        
         <div style={{ width: "80%", textAlign: "left", marginLeft: "1rem" }}>
           <div style={{ fontSize: "1rem", fontWeight: "bold" }}>{props.name || <Skeleton />}</div>
           <div className="text-truncate" style={{ color: "white", fontSize: "0.7rem" }}>

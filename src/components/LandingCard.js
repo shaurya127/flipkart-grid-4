@@ -10,18 +10,8 @@ import Heart from "../assets/images/cil_heart.png";
 
 
 const Landingdiv = styled.div`
-  // background: linear-gradient(
-  //   180deg,
-  //   rgba(0, 0, 0, 0.11) 0%,
-  //   rgba(0, 0, 0, 0.53125) 48.96%,
-  //   rgba(186, 104, 200, 0.53) 100%
-  // );
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.11) 0%,
-    rgba(0, 0, 0, 0.53125) 48.96%,
-    rgba(55, 55, 55, 0.8) 100%
-  );
+
+  background: red;
 
   opacity: 0.75;
   box-shadow: 0px -10px 25px rgba(0, 0, 0, 0.32);
