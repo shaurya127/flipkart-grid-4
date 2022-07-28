@@ -65,6 +65,8 @@ const NavLink = styled(Link)`
 
 const NavBar = (props) => {
   const { signUpWithName, currentUser } = useAuth();
+  const {logout}=useAuth();
+
   const [showDrawer, setShowDrawer] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -91,16 +93,8 @@ const NavBar = (props) => {
   };
 
   const Logout = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        if(!currentUser){
-          alert("Logged out successfully");
-        }
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+    (async ()=>{logout();})()
+    window.location.href = "/login";
   };
 
   // console.log(Web3.eth.getBalance("0x407d73d8a49eeb85d32cf465507dd71d507100c1"))
@@ -205,29 +199,19 @@ const NavBar = (props) => {
                 <div style={{ textDecoration: "none" }}>Add Product</div>
               </NavLink>
 
-              {signUpWithName ? (
+              {currentUser ? (
                 <div className="dropdown" onClick={Logout}>
                   <button className="dropbtn">Logout</button>
                 </div>
               ) : (
                 <NavLink to="/login">
                   <div className="dropdown">
-                    <button className="dropbtn">Login</button>
+                    <button className="dropbtn">Login/Signup</button>
                   </div>
                 </NavLink>
               )}
 
-              {/* <NavLink to="/register">
-                <div className="dropdown">
-                  <button className="dropbtn">Signup</button>
-                </div>
-              </NavLink>
-
-              <NavLink to="/login">
-                <div className="dropdown">
-                  <button className="dropbtn">Login</button>
-                </div>
-              </NavLink> */}
+             
 
               <div style={{ marginRight: "6.5rem" }}>
                 {wallet && wallet.address ? (

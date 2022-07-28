@@ -4,18 +4,15 @@ import styled from "styled-components";
 import axios from "axios";
 import Fundingimg from "../assets/images/FUNDING.png";
 import Landingcard from "./Newcard";
-// import Trending1 from "../assets/images/trending1.png";
 import { Link } from "react-router-dom";
 import Createsell from "../assets/images/createsell.png";
 import Card1 from "../assets/images/card.png";
 import Card2 from "../assets/images/card1.png";
 import Card3 from "../assets/images/card2.png";
-import Trendingcardsmall from "./Trendingcardsmall";
-import TopCollectionCard from "./TopCollectionCard";
 import Loader from "react-loader-spinner";
 import { Spin, Space } from "antd";
 import { fs } from "../firebase";
-
+import { useAuth } from "../context/AuthContext";
 const ImageContainer = styled.div`
   background: url(${Fundingimg});
   object-fit: contain;
@@ -94,6 +91,9 @@ const Cardtext = styled.div`
   align-items: center;
 `;
 const Landingpage = (props) => {
+  
+
+
   const [data, setData] = useState([]);
   const [productdata, setProductdata] = useState( []);
   const [loadingState, setLoadingState] = useState("not-loaded");
