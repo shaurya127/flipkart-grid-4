@@ -351,7 +351,7 @@ const Landingpage = (props) => {
               alt="C1"
             />
             <div style={{ marginLeft: "3rem", width: "70%" }}>
-              <Createsmallh>Create Your Collection</Createsmallh>
+              <Createsmallh>Create Your Product</Createsmallh>
               <Createmaint>
                 Click Create and Add social links, a description, profile &
                 banner images, and set a secondary sales fee.

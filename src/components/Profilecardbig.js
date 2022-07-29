@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-
+import {Button}   from "antd"
 import styled from "styled-components";
 import Landingcardimg from "../assets/images/landingimg.png";
 import Landingcardimg1 from "../assets/images/landingimg1.png"
@@ -10,6 +10,7 @@ import Heart from "../assets/images/cil_heart.png";
 import axios from "axios";
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { height } from "@mui/system";
 const Landingdiv = styled.div`
   background: linear-gradient(
     180deg,
@@ -68,10 +69,40 @@ const Btn = styled.div`
   }
 `;
 
+
+
+const getDays=(date1,date2)=>{
+  var d1=new Date(date1);
+  var d2=new Date(date2);
+  var dit = d2.getTime() - d1.getTime();
+  var did = dit / (1000 * 3600 * 24);
+  return did;
+  }
+
+  const CheckWarranty = async (timestamp,Warrantyperiod) => {
+    const getDiff=getDays(timestamp,new Date());
+    if(getDiff>Warrantyperiod){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
 const NFTCard = (props) => {
- 
-  const p = props.image; 
-  // console.log(p);
+  const timestamp=props.time;
+
+  const handleclick = async () => {
+    const getDiff=getDays(timestamp,new Date());
+    if(getDiff>props.Warranty){
+      alert("Your Product is out of warranty");
+    }
+    else{
+      alert("Your Product is in warranty");
+    }
+  }
+  const p=props.image;
+
   return (
     <Landingdiv>
     
@@ -96,9 +127,14 @@ const NFTCard = (props) => {
         
         <div style={{ width: "80%", textAlign: "left", marginLeft: "1rem" }}>
           <div style={{ fontSize: "1rem", fontWeight: "bold",color:"white" }}>{props.name }</div>
-          <div className="text-truncate" style={{ color: "white", fontSize: "0.7rem", }}>
-            Warranty:  {props.Warranty}
-          </div>
+          
+          
+          <Button variant="contained"   style={{backgroundColor:"#6495ED",width:"200px" ,height:"30px",borderRadius:"10px",color:"black",fontWeight:"600"}} onClick={handleclick} size="small">
+          Avail Warranty
+        </Button>
+          
+          
+
         </div>
       </div>
       <div style={{ width: "100%", marginTop: "0.5rem" }}>
@@ -118,7 +154,8 @@ const NFTCard = (props) => {
         >
           <div style={{ display: "flex" }}>
            
-            <div style={{ marginLeft: "0.4rem" ,color:"white"}}>Quantity: {props.Quantity}</div>
+            <div style={{ marginLeft: "0.4rem" ,color:"white"}}>Warranty: {props.Warranty}</div>
+            
           </div>
           <div style={{ display: "flex" }}>
             <div style={{ marginRight: "0.4rem",color:"white"  }}>Price: {props.price}</div>

@@ -17,6 +17,7 @@ import Eth from "../../assets/images/Ethereum (ETH).png";
 import { Spin, Avatar } from "antd";
 import { fs } from "../../firebase";
 import { mintNFT } from "../../contract/interact";
+import { sendTransaction } from "../../components/sendTransaction";
 import Web3 from "web3";
 const Splitscreen = styled.div`
   display: flex;
@@ -166,7 +167,6 @@ const ItemDescription = () => {
 
   const [Properties, setProperties] = useState([]);
   const { collection, id } = useParams();
-  // console.log(id);
   const [status, setStatus] = useState(false);
   const [data, setData] = useState([]);
   const [productdata, setProductdata] = useState([]);
@@ -216,6 +216,10 @@ const ItemDescription = () => {
   const Warranty = productdata.Warranty;
 
   const onMintPressed = async () => {
+    await sendTransaction(
+      "You have Purchse Token Successfully"
+    );
+    
     console.log(fileImg, name, price, sellerAddress, description, Quantity);
     const { success, status } = await mintNFT(
       fileImg,
@@ -226,6 +230,7 @@ const ItemDescription = () => {
       Warranty,
       sellerAddress
     );
+    
     setStatus(status);
     if (success) {
       // navigate to home page

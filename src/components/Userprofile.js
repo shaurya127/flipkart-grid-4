@@ -158,9 +158,9 @@ const Userprofile = () => {
 
   const getWalletNfts = async () => {
     const apiKey = "PTvX4BqWwpnxtE5hUYvtOgdDVcAQGBp_";
-    const baseURL = 'https://eth-rinkeby.alchemyapi.io/nft/v2/demo/getNFTs/?owner=0x49D588Db7d34c5E119262E9c5C4c3cCd2eE6F951'
+    const baseURL = 'https://eth-rinkeby.alchemyapi.io/nft/v2/demo/getNFTs/?owner=0x8Aee72af60dC55E753d4825eC6DbD304DaEA230b'
     // replace with the wallet address you want to query for NFTs
-    const ownerAddr = "0xBf27EA70F85Ae95dfA9B4360A9DBcBd6A2133250";
+    // const ownerAddr = "0x8Aee72af60dC55E753d4825eC6DbD304DaEA230b";
     
     var config = {
       method: 'get',
@@ -292,9 +292,8 @@ const Userprofile = () => {
               image={ele.metadata.image}
               name={ele.title}
               Warranty={ele.metadata.Warranty}
-              Quantity={ele.metadata.Quantity}
               price={ele.metadata.price}
-             
+              time={ele.metadata.time}
             />
           ))}
         </div>

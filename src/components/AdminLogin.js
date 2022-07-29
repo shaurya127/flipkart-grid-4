@@ -248,7 +248,7 @@ export default function Login({ setCompanyData }) {
                 >
                   Don't have an account?
                   <Link
-                    to="/sign-up"
+                    to="/register"
                     variant="body2"
                     style={{ marginLeft: "4px", color: "#5454d4" }}
                   >
