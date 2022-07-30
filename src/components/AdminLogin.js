@@ -189,9 +189,7 @@ export default function Login({ setCompanyData }) {
                             width: "40%",
                           }}
                         >
-                          <Link to="/forgot-pass" style={{ color: "#5454d4" }}>
-                            Forgot password?
-                          </Link>
+                          
                         </InputAdornment>
                       ),
                     }}
