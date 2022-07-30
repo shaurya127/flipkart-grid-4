@@ -325,13 +325,14 @@ const AddProduct = () => {
               alt="C1"
             />
             <div style={{ marginLeft: "3rem", width: "70%" }}>
-              <Createsmallh>Create Your Collection</Createsmallh>
+              <Createsmallh>Buy Product</Createsmallh>
               <Createmaint>
-                Click Create and Add social links, a description, profile &
-                banner images, and set a secondary sales fee.
+                Choose the product you want to buy from the list of products
+               
               </Createmaint>
             </div>
           </div>
+          
           <div
             style={{
               width: "47%",
@@ -346,13 +347,13 @@ const AddProduct = () => {
               alt="C1"
             />
             <div style={{ marginLeft: "3rem", width: "70%" }}>
-              <Createsmallh>Add Your Product</Createsmallh>
+              <Createsmallh>Avail Warranty</Createsmallh>
               <Createmaint>
-                Upload your work (image, video, audio, or 3D art), add a title
-                and description, and customize your product
+               Go to product you buy and click avail Warranty to check warranty status
               </Createmaint>
             </div>
           </div>
+
           <div
             style={{
               width: "47%",
@@ -369,12 +370,14 @@ const AddProduct = () => {
             <div style={{ marginLeft: "3rem", width: "70%" }}>
               <Createsmallh>List Them For Sale</Createsmallh>
               <Createmaint>
-                Choose between auctions, fixed-price listings, and
-                declining-price listings. You choose how you want to sell your
-                product
+                Add product description, price, quantity, warranty, and
+                seller address to list them for sale.
               </Createmaint>
             </div>
           </div>
+
+         
+
         </div>
         <Link
           to="/add-product"

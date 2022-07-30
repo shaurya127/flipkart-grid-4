@@ -240,14 +240,7 @@ const ItemDescription = () => {
     }
   };
 
-  // Web3.ethe(0x49D588Db7d34c5E119262E9c5C4c3cCd2eE6F951, (err, bal) => {
-  //   if (err) {
-  //     // Do something with the error
-  //     return console.error(err);
-  //   }
-  
-  //   console.log(bal.toString());
-  // })
+  // check balance in wallet
 
   if (loadingState !== "loaded") {
     return (
