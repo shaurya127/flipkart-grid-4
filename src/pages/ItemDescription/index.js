@@ -216,9 +216,7 @@ const ItemDescription = () => {
   const Warranty = productdata.Warranty;
 
   const onMintPressed = async () => {
-    await sendTransaction(
-      "You have Purchse Token Successfully"
-    );
+   
     
     console.log(fileImg, name, price, sellerAddress, description, Quantity);
     const { success, status } = await mintNFT(
