@@ -245,15 +245,7 @@ const NavBar = (props) => {
                                 </div>
                               </NavLink>
                             </Menu.Item>
-                            <Menu.Item key="1">
-                              <a href="/profile">My Items</a>
-                            </Menu.Item>
-                            <Menu.Item key="1">
-                              <a href="/collections">My Collections</a>
-                            </Menu.Item>
-                            <Menu.Item key="1">
-                              <a href="/profile">Offers</a>
-                            </Menu.Item>
+                            
                           </Menu>
                         }
                         trigger={["click"]}

@@ -395,7 +395,7 @@ const ItemDescription = () => {
                   }}
                 >
                   <div style={{ display: "flex" }}>
-                    <img src={Eth} alt="" />
+                   
                     <div style={{ marginLeft: "0.4rem" }}>
                       {productdata.price}
                     </div>
