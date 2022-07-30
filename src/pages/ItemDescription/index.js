@@ -202,9 +202,7 @@ const ItemDescription = () => {
   }, [dispatch, collection, id]);
 
   useEffect(() => {
-    // dispatch(fetchOngoingBids({
-    // tokenId: collection
-    // }));
+   
   }, []);
 
   const fileImg = productdata.url;
