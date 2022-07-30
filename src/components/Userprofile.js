@@ -228,52 +228,7 @@ const Userprofile = () => {
             <InnerText>Joined January 2022</InnerText>
           </Profilediv>
         </ImageContainer>
-        <Filtercurveddiv
-          style={{
-            marginTop: "10rem",
-            padding: "0 4rem",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ display: "flex", width: "80%" }}>
-            <Filtercurved
-              onClick={() => {
-                dispatchTemp({ type: "Collected" });
-              }}
-            >
-              Collected<div>0</div>
-            </Filtercurved>
-            <Filtercurved
-              onClick={() => {
-                dispatchTemp({ type: "Created" });
-              }}
-            >
-              Created<div>0</div>
-            </Filtercurved>
-            <Filtercurved>
-              Favourited<div>0</div>
-            </Filtercurved>
-            <Filtercurved>
-              Hidden<div>0</div>
-            </Filtercurved>
-            <Filtercurved>
-              Activity<div>0</div>
-            </Filtercurved>
-            <Filtercurved>
-              Offers<div>0</div>
-            </Filtercurved>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              width: "7%",
-              justifyContent: "space-between",
-            }}
-          ></div>
-        </Filtercurveddiv>
+        
 
 
 
@@ -284,6 +239,7 @@ const Userprofile = () => {
             alignItems: "start",
             justifyContent: "flex-start",
             flexWrap: "wrap",
+            marginTop: "10rem",
           }}
         >
           {profileNFT.map((ele) => (
