@@ -158,7 +158,7 @@ const Userprofile = () => {
 
   const getWalletNfts = async () => {
     const apiKey = "PTvX4BqWwpnxtE5hUYvtOgdDVcAQGBp_";
-    const baseURL = 'https://eth-rinkeby.alchemyapi.io/nft/v2/demo/getNFTs/?owner=0x8Aee72af60dC55E753d4825eC6DbD304DaEA230b'
+    const baseURL = 'https://eth-rinkeby.alchemyapi.io/nft/v2/demo/getNFTs/?owner=0x5f4AbD6766b4e7E727B31509D175662FA8C0862b'
     // replace with the wallet address you want to query for NFTs
     // const ownerAddr = "0x8Aee72af60dC55E753d4825eC6DbD304DaEA230b";
     
